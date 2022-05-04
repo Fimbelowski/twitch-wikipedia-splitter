@@ -1,10 +1,18 @@
 <template>
-  <div />
+  <BaseTextarea
+    id="input"
+    v-model="state.input"
+    label="Input"
+  />
 </template>
 
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import BaseTextarea from '@/components/BaseTextarea.vue';
+import { reactive } from 'vue';
+
+const state = reactive({
+  input: '',
+});
 </script>
 
 <style>
