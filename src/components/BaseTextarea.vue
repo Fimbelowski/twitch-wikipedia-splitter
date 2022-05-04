@@ -1,5 +1,6 @@
 <template>
   <label
+    class="base-textarea__label"
     :for="id"
   >
     {{ label }}
@@ -10,6 +11,7 @@
     :readonly="readonly"
     rows="25"
     :spellcheck="false"
+    :value="modelValue"
     @input="onInput"
   />
 </template>
@@ -32,7 +34,7 @@ function onInput(input: Event) {
 </script>
 
 <style>
-label {
+.base-textarea__label {
   display: block;
 }
 </style>
