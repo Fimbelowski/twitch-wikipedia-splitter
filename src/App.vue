@@ -57,8 +57,8 @@ const parsedInput = computed(() => {
     }
   }
 
-  // Fix orphaned commas
-  parsed = parsed.replace(/ ,/gm, ',');
+  // Fix orphaned punctuation
+  parsed = parsed.replace(/ ([.,])/gm, '$1');
 
   // Trim consecutive whitespace
   parsed = parsed.replace(/ {2}/gm, ' ');
