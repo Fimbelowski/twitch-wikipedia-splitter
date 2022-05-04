@@ -59,10 +59,6 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-function onCopyClick() {
-  console.log('Test...');
-}
-
 function removeParentheticals(input: string) {
   let strippedInput = input;
   
