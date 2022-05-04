@@ -1,18 +1,9 @@
 <template>
-  <BaseTextarea
-    id="input"
-    v-model="state.input"
-    label="Input"
-  />
+  <TextSplitter />
 </template>
 
 <script setup lang="ts">
-import BaseTextarea from '@/components/BaseTextarea.vue';
-import { reactive } from 'vue';
-
-const state = reactive({
-  input: '',
-});
+import TextSplitter from '@/components/TextSplitter.vue';
 </script>
 
 <style>
