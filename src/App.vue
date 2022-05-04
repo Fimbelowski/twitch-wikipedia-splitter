@@ -43,7 +43,7 @@ const parsedInput = computed(() => {
   let parsed = state.input;
 
   if (state.removeCitations) {
-    parsed = parsed.replace(/\[[^\]*]\]/gm, '');
+    parsed = parsed.replace(/\[[^\]]*\]/gm, '');
   }
 
   if (state.removeParentheticals) {
