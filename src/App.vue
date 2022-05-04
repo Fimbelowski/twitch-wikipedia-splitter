@@ -14,11 +14,10 @@ import TextSplitter from '@/components/TextSplitter.vue';
 }
 
 #app {
+  display: flex;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  justify-content: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

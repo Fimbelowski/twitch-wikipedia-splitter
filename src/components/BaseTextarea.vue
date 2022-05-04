@@ -34,6 +34,10 @@ function onInput(input: Event) {
 </script>
 
 <style>
+textarea {
+  resize: none;
+}
+
 .base-textarea__label {
   display: block;
 }

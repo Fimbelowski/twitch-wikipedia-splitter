@@ -1,25 +1,37 @@
 <template>
-  <BaseTextarea
-    id="input"
-    v-model="state.input"
-    label="Input"
-  />
-  <BaseCheckbox
-    id="remove-citations"
-    v-model="state.removeCitations"
-    label="Remove Citations"
-  />
-  <BaseCheckbox
-    id="remove-parentheticals"
-    v-model="state.removeParentheticals"
-    label="Remove Parentheticals"
-  />
-  <BaseTextarea
-    id="output"
-    label="Output"
-    :model-value="parsedInput"
-    readonly
-  />
+  <div
+    class="text-splitter__container"
+  >
+    <div
+      class="text-splitter__input"
+    >
+      <BaseTextarea
+        id="input"
+        v-model="state.input"
+        label="Input"
+      />
+      <BaseCheckbox
+        id="remove-citations"
+        v-model="state.removeCitations"
+        label="Remove Citations"
+      />
+      <BaseCheckbox
+        id="remove-parentheticals"
+        v-model="state.removeParentheticals"
+        label="Remove Parentheticals"
+      />
+    </div>
+    <div
+      class="text-splitter__output"
+    >
+      <BaseTextarea
+        id="output"
+        label="Output"
+        :model-value="parsedInput"
+        readonly
+      />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -53,3 +65,14 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 </script>
+
+<style>
+.text-splitter__container {
+  display: flex;
+  margin-top: 25px;
+}
+
+.text-splitter__input {
+  margin-right: 25px;
+}
+</style>
