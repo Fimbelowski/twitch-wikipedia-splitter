@@ -15,15 +15,15 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void,
-}>();
-
 defineProps<{
   id: string,
   label: string,
   modelValue: string,
   readonly?: boolean,
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void,
 }>();
 
 function onInput(input: Event) {
