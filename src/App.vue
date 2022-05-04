@@ -47,7 +47,7 @@ const parsedInput = computed(() => {
   }
 
   if (state.removeParentheticals) {
-    parsed = parsed.replace(/\([^)]*\)/gm, '');
+    parsed = removeParentheticals(parsed);
   }
 
   // Fix orphaned commas
@@ -58,6 +58,25 @@ const parsedInput = computed(() => {
 
   return parsed.trim();
 });
+
+function onCopyClick() {
+  console.log('Test...');
+}
+
+function removeParentheticals(input: string) {
+  let strippedInput = input;
+  
+  while (/\((?=.*\))/gm.test(strippedInput)) {
+    const start = strippedInput.lastIndexOf('(');
+    const substring = strippedInput
+      .substring(start)
+      .replace(/\([^)]*\)(?: |)/gm, '');
+
+    strippedInput = `${strippedInput.substring(0, start)}${substring}`;
+  }
+
+  return strippedInput;
+}
 </script>
 
 <style>
