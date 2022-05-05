@@ -25,6 +25,15 @@
       :model-value="parsedInput"
       readonly
     />
+    <ol>
+      <li
+        v-for="(chunk, index) in chunkedParsedInput"
+        :key="index"
+        style="max-width: 350px"
+      >
+        {{ chunk }}
+      </li>
+    </ol>
   </div>
 </template>
 
@@ -58,6 +67,32 @@ const parsedInput = computed(() => {
   parsed = parsed.replace(/ {2}/gm, ' ');
 
   return parsed.trim();
+});
+
+const chunkedParsedInput = computed(() => {
+  if (parsedInput.value.length === 0) {
+    return [''];
+  }
+
+  let remainingParsedInput = parsedInput.value;
+  const chunks: string[] = [];
+
+  while (remainingParsedInput.length > 0) {
+    if (remainingParsedInput.length > 500) {
+      let substring = remainingParsedInput.substring(0, 500);
+
+      const end = substring.lastIndexOf(' ');
+      chunks.push(substring.substring(0, end));
+      remainingParsedInput = remainingParsedInput
+        .substring(end)
+        .trim();
+    } else {
+      chunks.push(remainingParsedInput);
+      break;
+    }
+  }
+
+  return chunks;
 });
 </script>
 
