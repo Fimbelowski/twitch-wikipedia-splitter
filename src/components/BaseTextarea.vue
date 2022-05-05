@@ -18,12 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 const textarea = ref<HTMLTextAreaElement | null>(null);
 
-const props = defineProps<{
-  copyToClipboard?: boolean,
+defineProps<{
   id: string,
   label: string,
   modelValue: string,
@@ -31,19 +30,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'update:copyToClipboard', value: boolean,): void,
   (e: 'update:modelValue', value: string): void,
 }>();
-
-watch(
-  () => props.copyToClipboard,
-  (value) => {
-    if (value) {
-      copyToClipboard();
-      emit('update:copyToClipboard', false);
-    }
-  },  
-);
 
 function copyToClipboard() {
   textarea.value.select();
@@ -55,6 +43,10 @@ function copyToClipboard() {
 function onInput(input: Event) {
   emit('update:modelValue', (input.target as HTMLInputElement).value);
 }
+
+defineExpose({
+  copyToClipboard,
+});
 </script>
 
 <style>

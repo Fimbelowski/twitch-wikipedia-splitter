@@ -17,20 +17,14 @@
       v-model="state.removeParentheticals"
       label="Remove Parentheticals"
     />
-    <BaseCheckbox
-      id="go-to-next-chunk-on-copy"
-      v-model="state.autoSelectNextChunkOnCopy"
-      label="Go To Next Chunk on Copy"
-    />
   </div>
   <div>
     <BaseTextarea
       id="output"
-      v-model:copy-to-clipboard="state.copySelectedChunk"
+      ref="outputTextarea"
       :label="outputLabel"
       :model-value="selectedChunk"
       readonly
-      @update:copy-to-clipboard="maybeSelectNextChunk"
     />
     <div
       class="output__controls"
@@ -60,14 +54,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
+const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
+
 const state = reactive({
   autoSelectNextChunkOnCopy: true,
-  copySelectedChunk: false,
   input: '',
   removeCitations: true,
   removeParentheticals: true,
@@ -160,7 +155,7 @@ function maybeSelectNextChunk() {
 }
 
 function copyChunkToClipboard() {
-  state.copySelectedChunk = true;
+  outputTextarea.value.copyToClipboard();
 }
 </script>
 
@@ -191,5 +186,6 @@ button {
 .output__controls {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 </style>
