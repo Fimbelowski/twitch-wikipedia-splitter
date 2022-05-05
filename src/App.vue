@@ -25,6 +25,7 @@
       :label="outputLabel"
       :model-value="selectedChunk"
       readonly
+      @copy="maybeSelectNextChunk"
     />
     <div
       class="output__controls"

@@ -30,6 +30,7 @@ defineProps<{
 }>();
 
 const emit = defineEmits<{
+  (e: 'copy'): void,
   (e: 'update:modelValue', value: string): void,
 }>();
 
@@ -38,6 +39,8 @@ function copyToClipboard() {
   textarea.value.setSelectionRange(0, 500);
   navigator.clipboard.writeText(textarea.value.value);
   textarea.value.setSelectionRange(0,0);
+
+  emit('copy');
 }
 
 function onInput(input: Event) {
