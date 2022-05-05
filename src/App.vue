@@ -32,6 +32,7 @@
 import { computed, reactive } from 'vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
+import removeParentheticals from '../src/helpers/removeParentheticals';
 
 const state = reactive({
   input: '',
@@ -47,14 +48,7 @@ const parsedInput = computed(() => {
   }
 
   if (state.removeParentheticals) {
-    while (/\((?=.*\))/gm.test(parsed)) {
-      const start = parsed.lastIndexOf('(');
-      const substring = parsed
-        .substring(start)
-        .replace(/\([^)]*\)(?: |)/gm, '');
-
-      parsed = `${parsed.substring(0, start)}${substring}`;
-    }
+    parsed = removeParentheticals(parsed);
   }
 
   // Fix orphaned punctuation
