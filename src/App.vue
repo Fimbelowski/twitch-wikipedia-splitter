@@ -17,6 +17,12 @@
       v-model="state.removeParentheticals"
       label="Remove Parentheticals"
     />
+    <BaseSelect
+      id="chunking-behavior"
+      v-model="state.chunkingBehavior"
+      label="Chunking Behavior"
+      :options="chunkingBehaviorOptions"
+    />
   </div>
   <div>
     <BaseTextarea
@@ -62,7 +68,10 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
+import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
+import { ChunkingBehaviors } from './types/ChunkingBehaviors';
+import SelectOption from '../src/types/SelectOption';
 import chunkText from '../src/helpers/chunkText';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
@@ -70,11 +79,31 @@ const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
 
 const state = reactive({
   autoSelectNextChunkOnCopy: true,
+  chunkingBehavior: ChunkingBehaviors.wordBoundary,
   input: '',
   removeCitations: true,
   removeParentheticals: true,
   selectedChunkIndex: 0,
 });
+
+const chunkingBehaviorOptions: SelectOption[] = [
+  {
+    label: 'Chunk Size',
+    value: ChunkingBehaviors.chunkSize,
+  },
+  {
+    label: 'None',
+    value: ChunkingBehaviors.none,
+  },
+  {
+    label: 'Sentence Boundary',
+    value: ChunkingBehaviors.sentenceBoundary,
+  },
+  {
+    label: 'Word Boundary',
+    value: ChunkingBehaviors.wordBoundary,
+  },
+];
 
 watch(
   ([
@@ -107,7 +136,7 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => chunkText(parsedInput.value));
+const chunkedParsedInput = computed(() => chunkText(parsedInput.value, state.chunkingBehavior));
 
 const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
 const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
