@@ -21,33 +21,58 @@
   <div>
     <BaseTextarea
       id="output"
-      label="Output"
-      :model-value="parsedInput"
+      v-model:copy-to-clipboard="state.copySelectedChunk"
+      :label="outputLabel"
+      :model-value="selectedChunk"
       readonly
     />
-    <ol>
-      <li
-        v-for="(chunk, index) in chunkedParsedInput"
-        :key="index"
-        style="max-width: 350px"
+    <div
+      class="output__controls"
+    >
+      <button
+        :disabled="previousChunkDisabled"
+        type="button"
+        @click="selectPreviousChunk"
       >
-        {{ chunk }}
-      </li>
-    </ol>
+        &lt; Previous
+      </button>
+      <button
+        type="button"
+        @click="copyChunkToClipboard"
+      >
+        Copy Chunk
+      </button>
+      <button
+        :disabled="nextChunkDisabled"
+        type="button"
+        @click="selectNextChunk"
+      >
+        Next &gt;
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
 const state = reactive({
+  copySelectedChunk: false,
   input: '',
   removeCitations: true,
   removeParentheticals: true,
+  selectedChunkIndex: 0,
 });
+
+watch( // Should also reset selectedChunkIndex when parsedInput is updated
+  () => state.input,
+  () => {
+    state.selectedChunkIndex = 0;
+  },
+);
 
 const parsedInput = computed(() => {
   let parsed = state.input;
@@ -94,6 +119,32 @@ const chunkedParsedInput = computed(() => {
 
   return chunks;
 });
+
+const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
+const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
+const nextChunkDisabled = computed(() => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
+
+const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
+
+function selectPreviousChunk() {
+  if (previousChunkDisabled.value) {
+    return;
+  }
+
+  state.selectedChunkIndex--;
+}
+
+function selectNextChunk() {
+  if (nextChunkDisabled.value) {
+    return;
+  }
+
+  state.selectedChunkIndex++;
+}
+
+function copyChunkToClipboard() {
+  state.copySelectedChunk = true;
+}
 </script>
 
 <style>
@@ -101,6 +152,10 @@ const chunkedParsedInput = computed(() => {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+button {
+  padding: 3px;
 }
 
 #app {
@@ -114,5 +169,10 @@ const chunkedParsedInput = computed(() => {
 
 .input {
   margin-right: 25px;
+}
+
+.output__controls {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
