@@ -50,6 +50,11 @@
         Next &gt;
       </button>
     </div>
+    <BaseCheckbox
+      id="go-to-next-chunk-on-copy"
+      v-model="state.autoSelectNextChunkOnCopy"
+      label="Go To Next Chunk Automatically"
+    />
   </div>
 </template>
 
