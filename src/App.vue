@@ -17,6 +17,11 @@
       v-model="state.removeParentheticals"
       label="Remove Parentheticals"
     />
+    <BaseCheckbox
+      id="go-to-next-chunk-on-copy"
+      v-model="state.autoSelectNextChunkOnCopy"
+      label="Go To Next Chunk on Copy"
+    />
   </div>
   <div>
     <BaseTextarea
@@ -25,6 +30,7 @@
       :label="outputLabel"
       :model-value="selectedChunk"
       readonly
+      @update:copy-to-clipboard="maybeSelectNextChunk"
     />
     <div
       class="output__controls"
@@ -60,6 +66,7 @@ import BaseTextarea from '@/components/BaseTextarea.vue';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
 const state = reactive({
+  autoSelectNextChunkOnCopy: true,
   copySelectedChunk: false,
   input: '',
   removeCitations: true,
@@ -144,6 +151,12 @@ function selectNextChunk() {
   }
 
   state.selectedChunkIndex++;
+}
+
+function maybeSelectNextChunk() {
+  if (state.autoSelectNextChunkOnCopy) {
+    selectNextChunk();
+  }
 }
 
 function copyChunkToClipboard() {
