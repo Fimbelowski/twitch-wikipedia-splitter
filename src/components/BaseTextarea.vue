@@ -48,8 +48,8 @@ watch(
 function copyToClipboard() {
   textarea.value.select();
   textarea.value.setSelectionRange(0, 500);
-
   navigator.clipboard.writeText(textarea.value.value);
+  textarea.value.setSelectionRange(0,0);
 }
 
 function onInput(input: Event) {
