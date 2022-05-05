@@ -67,8 +67,12 @@ const state = reactive({
   selectedChunkIndex: 0,
 });
 
-watch( // Should also reset selectedChunkIndex when parsedInput is updated
-  () => state.input,
+watch(
+  ([
+    () => state.input,
+    () => state.removeCitations,
+    () => state.removeParentheticals,
+  ]),
   () => {
     state.selectedChunkIndex = 0;
   },
