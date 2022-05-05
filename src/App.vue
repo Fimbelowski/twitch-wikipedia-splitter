@@ -63,6 +63,7 @@
 import { computed, reactive, ref, watch } from 'vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
+import chunkText from '../src/helpers/chunkText';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
 const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
@@ -106,31 +107,7 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => {
-  if (parsedInput.value.length === 0) {
-    return [''];
-  }
-
-  let remainingParsedInput = parsedInput.value;
-  const chunks: string[] = [];
-
-  while (remainingParsedInput.length > 0) {
-    if (remainingParsedInput.length > 500) {
-      let substring = remainingParsedInput.substring(0, 500);
-
-      const end = substring.lastIndexOf(' ');
-      chunks.push(substring.substring(0, end));
-      remainingParsedInput = remainingParsedInput
-        .substring(end)
-        .trim();
-    } else {
-      chunks.push(remainingParsedInput);
-      break;
-    }
-  }
-
-  return chunks;
-});
+const chunkedParsedInput = computed(() => chunkText(parsedInput.value));
 
 const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
 const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
