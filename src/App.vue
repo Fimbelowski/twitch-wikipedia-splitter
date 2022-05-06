@@ -87,7 +87,7 @@ const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
 
 const state = reactive({
   autoSelectNextChunkOnCopy: true,
-  chunkingBehavior: ChunkingBehaviors.wordBoundary,
+  chunkingBehavior: ChunkingBehaviors.sentenceBoundary,
   chunkingBehaviorBalkingDistance: 100,
   input: '',
   removeCitations: true,
