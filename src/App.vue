@@ -23,6 +23,13 @@
       label="Chunking Behavior"
       :options="chunkingBehaviorOptions"
     />
+    <NumberInput
+      id="balking-distance"
+      v-model="state.chunkingBehaviorBalkingDistance"
+      label="Balking Distance"
+      :max="499"
+      :min="1"
+    />
   </div>
   <div>
     <BaseTextarea
@@ -71,6 +78,7 @@ import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
 import { ChunkingBehaviors } from './types/ChunkingBehaviors';
+import NumberInput from '@/components/NumberInput.vue';
 import SelectOption from '../src/types/SelectOption';
 import chunkText from '../src/helpers/chunkText';
 import removeParentheticals from '../src/helpers/removeParentheticals';
@@ -80,6 +88,7 @@ const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
 const state = reactive({
   autoSelectNextChunkOnCopy: true,
   chunkingBehavior: ChunkingBehaviors.wordBoundary,
+  chunkingBehaviorBalkingDistance: 100,
   input: '',
   removeCitations: true,
   removeParentheticals: true,
@@ -136,7 +145,7 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => chunkText(parsedInput.value, state.chunkingBehavior));
+const chunkedParsedInput = computed(() => chunkText(parsedInput.value, state.chunkingBehavior, state.chunkingBehaviorBalkingDistance));
 
 const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
 const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);

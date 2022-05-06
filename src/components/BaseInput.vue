@@ -1,35 +1,30 @@
 <template>
   <div>
     <label
-      class="base-select__label"
+      class="base-input__label"
       :for="id"
     >
       {{ label }}
     </label>
-    <select
+    <input
       :id="id"
+      :max="max"
+      :min="min"
+      :type="type"
       :value="modelValue"
       @input="onInput"
     >
-      <option
-        v-for="(option, index) in options"
-        :key="index"
-        :value="option.value"
-      >
-        {{ option.label }}
-      </option>
-    </select>
   </div>
 </template>
 
 <script setup lang="ts">
-import SelectOption from '../types/SelectOption';
-
 defineProps<{
   id: string,
   label: string,
-  options: SelectOption[],
+  max: number,
+  min: number,
   modelValue: string,
+  type: string,
 }>();
 
 const emit = defineEmits<{
@@ -37,12 +32,12 @@ const emit = defineEmits<{
 }>();
 
 function onInput(event: Event) {
-  emit('update:modelValue', (event.target as HTMLSelectElement).value);
+  emit('update:modelValue', (event.target as HTMLInputElement).value);
 }
 </script>
 
 <style>
-.base-select__label {
+.base-input__label {
   margin-right: 5px;
 }
 </style>
