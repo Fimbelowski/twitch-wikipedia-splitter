@@ -191,15 +191,6 @@ button {
   padding: 3px;
 }
 
-#app {
-  display: flex;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  justify-content: center;
-  padding-top: 25px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .input {
   margin-right: 25px;
 }
@@ -208,5 +199,14 @@ button {
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
+}
+
+#app {
+  display: flex;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  justify-content: center;
+  padding-top: 25px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 </style>
