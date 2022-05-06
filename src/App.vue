@@ -7,12 +7,12 @@
       v-model="state.input"
       label="Input"
     />
-    <BaseCheckbox
+    <CheckboxInput
       id="remove-citations"
       v-model="state.removeCitations"
       label="Remove Citations"
     />
-    <BaseCheckbox
+    <CheckboxInput
       id="remove-parentheticals"
       v-model="state.removeParentheticals"
       label="Remove Parentheticals"
@@ -64,7 +64,7 @@
         Next &gt;
       </button>
     </div>
-    <BaseCheckbox
+    <CheckboxInput
       id="go-to-next-chunk-on-copy"
       v-model="state.autoSelectNextChunkOnCopy"
       label="Go To Next Chunk Automatically"
@@ -74,9 +74,9 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
-import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
+import CheckboxInput from '@/components/CheckboxInput.vue';
 import { ChunkingBehaviors } from './types/ChunkingBehaviors';
 import NumberInput from '@/components/NumberInput.vue';
 import SelectOption from '../src/types/SelectOption';
