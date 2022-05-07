@@ -149,7 +149,7 @@ const parsedInput = computed(() => {
   parsed = parsed.replace(/[\n\r]/gm, ' ');
 
   // Fix orphaned punctuation
-  parsed = parsed.replace(/ ([.,])/gm, '$1');
+  parsed = parsed.replace(/ {1,}([.,])/gm, '$1');
 
   // Trim consecutive whitespace
   parsed = parsed.replace(/ {2,}/gm, ' ');
