@@ -86,6 +86,7 @@ import { ChunkingBehaviors } from './types/ChunkingBehaviors';
 import NumberInput from '@/components/NumberInput.vue';
 import SelectOption from '../src/types/SelectOption';
 import chunkText from '../src/helpers/chunkText';
+import fixOrphanedPunctuation from '../src/helpers/fixOrphanedPunctutation';
 import removeCitations from '../src/helpers/removeCitations';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
@@ -148,8 +149,7 @@ const parsedInput = computed(() => {
   // Remove line terminators
   parsed = parsed.replace(/[\n\r]/gm, ' ');
 
-  // Fix orphaned punctuation
-  parsed = parsed.replace(/ {1,}([.,])/gm, '$1');
+  parsed = fixOrphanedPunctuation(parsed);
 
   // Trim consecutive whitespace
   parsed = parsed.replace(/ {2,}/gm, ' ');
