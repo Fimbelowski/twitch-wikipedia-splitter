@@ -4,33 +4,33 @@
   >
     <BaseTextarea
       id="input"
-      v-model="state.input"
+      v-model="inputState.input"
       label="Input"
     />
     <CheckboxInput
       id="remove-citations"
-      v-model="state.removeCitations"
+      v-model="inputState.removeCitations"
       label="Remove Citations"
     />
     <CheckboxInput
       id="remove-line-terminators"
-      v-model="state.removeLineTerminators"
+      v-model="inputState.removeLineTerminators"
       label="Remove Line Terminators"
     />
     <CheckboxInput
       id="remove-parentheticals"
-      v-model="state.removeParentheticals"
+      v-model="inputState.removeParentheticals"
       label="Remove Parentheticals"
     />
     <BaseSelect
       id="chunking-behavior"
-      v-model="state.chunkingBehavior"
+      v-model="inputState.chunkingBehavior"
       label="Chunking Behavior"
       :options="chunkingBehaviorOptions"
     />
     <NumberInput
       id="balking-distance"
-      v-model="state.chunkingBehaviorBalkingDistance"
+      v-model="inputState.chunkingBehaviorBalkingDistance"
       label="Balking Distance"
       :max="499"
       :min="1"
@@ -71,7 +71,7 @@
     </div>
     <CheckboxInput
       id="go-to-next-chunk-on-copy"
-      v-model="state.autoSelectNextChunkOnCopy"
+      v-model="outputState.autoSelectNextChunkOnCopy"
       label="Go To Next Chunk Automatically"
     />
   </div>
@@ -90,14 +90,17 @@ import removeParentheticals from '../src/helpers/removeParentheticals';
 
 const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
 
-const state = reactive({
-  autoSelectNextChunkOnCopy: true,
+const inputState = reactive({
   chunkingBehavior: ChunkingBehaviors.sentenceBoundary,
   chunkingBehaviorBalkingDistance: 100,
   input: '',
   removeCitations: true,
   removeLineTerminators: true,
   removeParentheticals: true,
+});
+
+const outputState = reactive({
+  autoSelectNextChunkOnCopy: true,
   selectedChunkIndex: 0,
 });
 
@@ -122,23 +125,23 @@ const chunkingBehaviorOptions: SelectOption[] = [
 
 watch(
   ([
-    () => state.input,
-    () => state.removeCitations,
-    () => state.removeParentheticals,
+    () => inputState.input,
+    () => inputState.removeCitations,
+    () => inputState.removeParentheticals,
   ]),
   () => {
-    state.selectedChunkIndex = 0;
+    outputState.selectedChunkIndex = 0;
   },
 );
 
 const parsedInput = computed(() => {
-  let parsed = state.input;
+  let parsed = inputState.input;
 
-  if (state.removeCitations) {
+  if (inputState.removeCitations) {
     parsed = parsed.replace(/\[[^\]]*\]/gm, '');
   }
 
-  if (state.removeParentheticals) {
+  if (inputState.removeParentheticals) {
     parsed = removeParentheticals(parsed);
   }
 
@@ -154,20 +157,20 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => chunkText(parsedInput.value, state.chunkingBehavior, state.chunkingBehaviorBalkingDistance));
+const chunkedParsedInput = computed(() => chunkText(parsedInput.value, inputState.chunkingBehavior, inputState.chunkingBehaviorBalkingDistance));
 
-const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
-const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
-const nextChunkDisabled = computed(() => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
+const selectedChunk = computed(() => chunkedParsedInput.value[outputState.selectedChunkIndex]);
+const previousChunkDisabled = computed(() => outputState.selectedChunkIndex === 0);
+const nextChunkDisabled = computed(() => outputState.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
 
-const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
+const outputLabel = computed(() => `Output (${outputState.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 
 function selectPreviousChunk() {
   if (previousChunkDisabled.value) {
     return;
   }
 
-  state.selectedChunkIndex--;
+  outputState.selectedChunkIndex--;
 }
 
 function selectNextChunk() {
@@ -175,11 +178,11 @@ function selectNextChunk() {
     return;
   }
 
-  state.selectedChunkIndex++;
+  outputState.selectedChunkIndex++;
 }
 
 function maybeSelectNextChunk() {
-  if (state.autoSelectNextChunkOnCopy) {
+  if (outputState.autoSelectNextChunkOnCopy) {
     selectNextChunk();
   }
 }
