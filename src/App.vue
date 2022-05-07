@@ -86,10 +86,8 @@ import { ChunkingBehaviors } from './types/ChunkingBehaviors';
 import NumberInput from '@/components/NumberInput.vue';
 import SelectOption from '../src/types/SelectOption';
 import chunkText from '../src/helpers/chunkText';
-import fixOrphanedPunctuation from '../src/helpers/fixOrphanedPunctutation';
 import removeCitations from '../src/helpers/removeCitations';
 import removeParentheticals from '../src/helpers/removeParentheticals';
-import trimConsecutiveSpaces from '../src/helpers/trimConsecutiveSpaces';
 
 const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
 
@@ -150,8 +148,12 @@ const parsedInput = computed(() => {
   // Remove line terminators
   parsed = parsed.replace(/[\n\r]/gm, ' ');
 
-  parsed = fixOrphanedPunctuation(parsed);
-  parsed = trimConsecutiveSpaces(parsed);
+  // Trim consecutive spaces
+  parsed = parsed.replace(/ {2,}/gm, ' ');
+
+  // Fix orphaned punctuation
+  parsed = parsed.replace(/ ([.,])/gm, '$1');
+
   return parsed.trim();
 });
 
