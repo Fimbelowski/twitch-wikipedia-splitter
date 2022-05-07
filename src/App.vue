@@ -152,7 +152,7 @@ const parsedInput = computed(() => {
   parsed = parsed.replace(/ ([.,])/gm, '$1');
 
   // Trim consecutive whitespace
-  parsed = parsed.replace(/ {2}/gm, ' ');
+  parsed = parsed.replace(/ {2,}/gm, ' ');
 
   return parsed.trim();
 });
