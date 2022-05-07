@@ -22,6 +22,12 @@
       v-model="inputState.removeParentheticals"
       label="Remove Parentheticals"
     />
+    <NumberInput
+      id="max-chunk-size"
+      v-model="inputState.maxChunkSize"
+      label="Maximum Chunk Size"
+      :min="1"
+    />
     <BaseSelect
       id="chunking-behavior"
       v-model="inputState.chunkingBehavior"
@@ -93,6 +99,7 @@ const inputState = reactive({
   chunkingBehavior: ChunkingBehaviors.sentenceBoundary,
   chunkingBehaviorBalkingDistance: 100,
   input: '',
+  maxChunkSize: 500,
   removeCitations: true,
   removeLineTerminators: true,
   removeParentheticals: true,
