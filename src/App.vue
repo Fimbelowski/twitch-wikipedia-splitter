@@ -89,8 +89,6 @@ import chunkText from '../src/helpers/chunkText';
 import removeCitations from '../src/helpers/removeCitations';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
-const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
-
 const inputState = reactive({
   chunkingBehavior: ChunkingBehaviors.sentenceBoundary,
   chunkingBehaviorBalkingDistance: 100,
@@ -98,11 +96,6 @@ const inputState = reactive({
   removeCitations: true,
   removeLineTerminators: true,
   removeParentheticals: true,
-});
-
-const outputState = reactive({
-  autoSelectNextChunkOnCopy: true,
-  selectedChunkIndex: 0,
 });
 
 const chunkingBehaviorOptions: SelectOption[] = [
@@ -123,16 +116,6 @@ const chunkingBehaviorOptions: SelectOption[] = [
     value: ChunkingBehaviors.wordBoundary,
   },
 ];
-
-watch(
-  () => inputState,
-  () => {
-    outputState.selectedChunkIndex = 0;
-  },
-  {
-    deep: true,
-  },
-);
 
 const parsedInput = computed(() => {
   let parsed = inputState.input;
@@ -159,12 +142,26 @@ const parsedInput = computed(() => {
 
 const chunkedParsedInput = computed(() => chunkText(parsedInput.value, inputState.chunkingBehavior, inputState.chunkingBehaviorBalkingDistance));
 
-const selectedChunk = computed(() => chunkedParsedInput.value[outputState.selectedChunkIndex]);
-const previousChunkDisabled = computed(() => outputState.selectedChunkIndex === 0);
-const nextChunkDisabled = computed(() => outputState.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
+const outputState = reactive({
+  autoSelectNextChunkOnCopy: true,
+  selectedChunkIndex: 0,
+});
+
+watch(
+  () => inputState,
+  () => {
+    outputState.selectedChunkIndex = 0;
+  },
+  {
+    deep: true,
+  },
+);
 
 const outputLabel = computed(() => `Output (${outputState.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
+const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
+const selectedChunk = computed(() => chunkedParsedInput.value[outputState.selectedChunkIndex]);
 
+const previousChunkDisabled = computed(() => outputState.selectedChunkIndex === 0);
 function selectPreviousChunk() {
   if (previousChunkDisabled.value) {
     return;
@@ -173,6 +170,7 @@ function selectPreviousChunk() {
   outputState.selectedChunkIndex--;
 }
 
+const nextChunkDisabled = computed(() => outputState.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
 function selectNextChunk() {
   if (nextChunkDisabled.value) {
     return;
