@@ -86,6 +86,7 @@ import { ChunkingBehaviors } from './types/ChunkingBehaviors';
 import NumberInput from '@/components/NumberInput.vue';
 import SelectOption from '../src/types/SelectOption';
 import chunkText from '../src/helpers/chunkText';
+import removeCitations from '../src/helpers/removeCitations';
 import removeParentheticals from '../src/helpers/removeParentheticals';
 
 const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
@@ -136,12 +137,12 @@ watch(
 const parsedInput = computed(() => {
   let parsed = inputState.input;
 
-  if (inputState.removeCitations) {
-    parsed = parsed.replace(/\[[^\]]*\]/gm, '');
-  }
-
   if (inputState.removeParentheticals) {
     parsed = removeParentheticals(parsed);
+  }
+
+  if (inputState.removeCitations) {
+    parsed = removeCitations(parsed);
   }
 
   // Remove line terminators
