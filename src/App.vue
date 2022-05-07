@@ -13,6 +13,11 @@
       label="Remove Citations"
     />
     <CheckboxInput
+      id="remove-line-terminators"
+      v-model="state.removeLineTerminators"
+      label="Remove Line Terminators"
+    />
+    <CheckboxInput
       id="remove-parentheticals"
       v-model="state.removeParentheticals"
       label="Remove Parentheticals"
@@ -91,6 +96,7 @@ const state = reactive({
   chunkingBehaviorBalkingDistance: 100,
   input: '',
   removeCitations: true,
+  removeLineTerminators: true,
   removeParentheticals: true,
   selectedChunkIndex: 0,
 });
@@ -135,6 +141,9 @@ const parsedInput = computed(() => {
   if (state.removeParentheticals) {
     parsed = removeParentheticals(parsed);
   }
+
+  // Remove line terminators
+  parsed = parsed.replace(/[\n\r]/gm, ' ');
 
   // Fix orphaned punctuation
   parsed = parsed.replace(/ ([.,])/gm, '$1');
