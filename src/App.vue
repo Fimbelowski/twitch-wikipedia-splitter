@@ -89,6 +89,7 @@ import chunkText from '../src/helpers/chunkText';
 import fixOrphanedPunctuation from '../src/helpers/fixOrphanedPunctutation';
 import removeCitations from '../src/helpers/removeCitations';
 import removeParentheticals from '../src/helpers/removeParentheticals';
+import trimConsecutiveSpaces from '../src/helpers/trimConsecutiveSpaces';
 
 const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
 
@@ -150,10 +151,7 @@ const parsedInput = computed(() => {
   parsed = parsed.replace(/[\n\r]/gm, ' ');
 
   parsed = fixOrphanedPunctuation(parsed);
-
-  // Trim consecutive whitespace
-  parsed = parsed.replace(/ {2,}/gm, ' ');
-
+  parsed = trimConsecutiveSpaces(parsed);
   return parsed.trim();
 });
 
