@@ -124,13 +124,12 @@ const chunkingBehaviorOptions: SelectOption[] = [
 ];
 
 watch(
-  ([
-    () => inputState.input,
-    () => inputState.removeCitations,
-    () => inputState.removeParentheticals,
-  ]),
+  () => inputState,
   () => {
     outputState.selectedChunkIndex = 0;
+  },
+  {
+    deep: true,
   },
 );
 
