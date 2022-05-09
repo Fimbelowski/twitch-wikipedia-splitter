@@ -29,21 +29,20 @@ export default function chunkText(
     let distance = Infinity;
 
     if (chunkingBehavior === ChunkingBehaviors.sentenceBoundary) {
-      let matches: RegExpMatchArray[];
+      let matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
 
-      if (hardSentenceBoundaryRegExp.test(rawChunk)) {
-        matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
+      if (matches.length > 0) {
         tentativeEndIndex = matches.pop().index;
         distance = 500 - tentativeEndIndex + 1;
       }
 
-      if (
-        distance > balkingDistance
-        && softSentenceBoundaryRegExp.test(rawChunk)
-      ) {
+      if (distance > balkingDistance) {
         matches = Array.from(rawChunk.matchAll(softSentenceBoundaryRegExp));
-        tentativeEndIndex = matches.pop().index;
-        distance = 500 - tentativeEndIndex + 1;
+
+        if (matches.length > 0) {
+          tentativeEndIndex = matches.pop().index;
+          distance = 500 - tentativeEndIndex + 1;
+        }
       }
     }
 
@@ -59,7 +58,7 @@ export default function chunkText(
     chunks.push(rawChunk.substring(0, tentativeEndIndex + 1));
     remainingInput = remainingInput
       .substring(tentativeEndIndex + 1)
-      .trim();    
+      .trim();
   }
 
   return chunks;
