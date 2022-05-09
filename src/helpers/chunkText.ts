@@ -1,6 +1,6 @@
 import { ChunkingBehaviors } from '../types/ChunkingBehaviors';
-const hardSentenceBoundaryRegexp = /[.?!] /gm;
-const softSentenceBoundaryRegexp = /[,;-] /gm;
+const hardSentenceBoundaryRegExp = /[.?!] /gm;
+const softSentenceBoundaryRegExp = /[,;-] /gm;
 
 export default function chunkText(
   input: string,
@@ -10,7 +10,7 @@ export default function chunkText(
 ) {
   if (
     chunkingBehavior === ChunkingBehaviors.none
-    || input.length === 0
+    || input === ''
     ) {
     return [input];
   }
@@ -31,17 +31,17 @@ export default function chunkText(
     if (chunkingBehavior === ChunkingBehaviors.sentenceBoundary) {
       let matches: RegExpMatchArray[];
 
-      if (hardSentenceBoundaryRegexp.test(rawChunk)) {
-        matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegexp));
+      if (hardSentenceBoundaryRegExp.test(rawChunk)) {
+        matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
         tentativeEndIndex = matches.pop().index;
         distance = 500 - tentativeEndIndex + 1;
       }
 
       if (
         distance > balkingDistance
-        && softSentenceBoundaryRegexp.test(rawChunk)
+        && softSentenceBoundaryRegExp.test(rawChunk)
       ) {
-        matches = Array.from(rawChunk.matchAll(softSentenceBoundaryRegexp));
+        matches = Array.from(rawChunk.matchAll(softSentenceBoundaryRegExp));
         tentativeEndIndex = matches.pop().index;
         distance = 500 - tentativeEndIndex + 1;
       }
