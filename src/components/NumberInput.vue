@@ -17,8 +17,8 @@ import { computed } from 'vue';
 const props = defineProps<{
   id: string,
   label: string,
-  max: number,
-  min: number,
+  max?: number,
+  min?: number,
   modelValue: number,
 }>();
 
