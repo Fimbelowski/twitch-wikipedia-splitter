@@ -147,7 +147,12 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => chunkText(parsedInput.value, inputState.chunkingBehavior, inputState.chunkingBehaviorBalkingDistance));
+const chunkedParsedInput = computed(() => chunkText(
+  parsedInput.value,
+  inputState.maxChunkSize,
+  inputState.chunkingBehavior,
+  inputState.chunkingBehaviorBalkingDistance,
+));
 
 const outputState = reactive({
   autoSelectNextChunkOnCopy: true,
