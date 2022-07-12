@@ -35,6 +35,10 @@ const emit = defineEmits<{
 }>();
 
 function copyToClipboard() {
+  if (textarea.value === null) {
+    return;
+  }
+
   textarea.value.select();
   textarea.value.setSelectionRange(0, 500);
   navigator.clipboard.writeText(textarea.value.value);

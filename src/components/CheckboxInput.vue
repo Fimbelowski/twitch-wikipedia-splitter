@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseInput from '@/components/BaseInput.vue';
+import BaseInput from './BaseInput.vue';
 
 defineProps<{
   id: string,
@@ -21,7 +21,11 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void,
 }>();
 
-function onUpdateModelValue(value: boolean) {
+function onUpdateModelValue(value: boolean | string) {
+  if (typeof value === 'string') {
+    return;
+  }
+
   emit('update:modelValue', value);
 }
 </script>

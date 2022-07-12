@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseInput from '@/components/BaseInput.vue';
+import BaseInput from './BaseInput.vue';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -28,7 +28,11 @@ const emit = defineEmits<{
 
 const modelValueAsString = computed(() => props.modelValue.toString());
 
-function onUpdateModelValue(value: string) {
+function onUpdateModelValue(value: string | boolean) {
+  if (typeof value === 'boolean') {
+    return;
+  }
+
   emit('update:modelValue', parseInt(value, 10));
 }
 </script>

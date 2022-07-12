@@ -5,7 +5,7 @@
     "jsx": "preserve",
     "lib": [
       "esnext",
-      "dom",
+      "dom"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -14,17 +14,17 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "useDefineForClassFields": true,
+    "useDefineForClassFields": true
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
+    "src/**/*.vue"
   ],
   "references": [
     {
-      "path": "./tsconfig.node.json",
-    },
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

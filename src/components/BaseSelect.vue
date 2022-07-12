@@ -23,12 +23,14 @@
 </template>
 
 <script setup lang="ts">
-import SelectOption from '../types/SelectOption';
 
 defineProps<{
   id: string,
   label: string,
-  options: SelectOption[],
+  options: {
+    label: string,
+    value: string,
+  }[],
   modelValue: string,
 }>();
 
