@@ -14,9 +14,9 @@
       <option
         v-for="(option, index) in options"
         :key="index"
-        :value="option.value"
+        :value="option"
       >
-        {{ option.label }}
+        {{ option }}
       </option>
     </select>
   </div>
@@ -27,10 +27,7 @@
 defineProps<{
   id: string,
   label: string,
-  options: {
-    label: string,
-    value: string,
-  }[],
+  options: string[],
   modelValue: string,
 }>();
 
