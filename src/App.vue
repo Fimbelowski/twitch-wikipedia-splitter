@@ -4,7 +4,7 @@ import BaseTextarea from './components/BaseTextarea.vue';
 import CheckboxInput from './components/CheckboxInput.vue';
 import NumberInput from './components/NumberInput.vue';
 import BaseSelect from './components/BaseSelect.vue';
-import { default as ChunkingBehaviors } from './ChunkingBehaviors';
+import { default as ChunkingBehaviors } from './types/ChunkingBehaviors';
 
 const inputState = reactive({
   input: '',
