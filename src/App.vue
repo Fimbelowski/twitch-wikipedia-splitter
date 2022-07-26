@@ -5,6 +5,7 @@ import CheckboxInput from './components/CheckboxInput.vue';
 import NumberInput from './components/NumberInput.vue';
 import BaseSelect from './components/BaseSelect.vue';
 import { default as ChunkingBehaviors } from './types/ChunkingBehaviors';
+import { default as removeParentheticals } from './utilities/removeParentheticals';
 
 const inputState = reactive({
   input: '',
@@ -35,26 +36,6 @@ watch(
 
 const outputLabel = computed(() => `Output (${outputState.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 const selectedChunk = computed(() => chunkedParsedInput.value[outputState.selectedChunkIndex]);
-
-function removeParentheticals(input: string) {
-  let strippedInput = input;
-
-  for (let i = strippedInput.length - 1; i > -1; i--) {
-    const currentCharacter = strippedInput.charAt(i);
-    let end = -1;
-
-    if (currentCharacter === '(') {
-      end = strippedInput.indexOf(')', i);
-
-      if (end !== -1) {
-        strippedInput = `${strippedInput.substring(0, i)}${strippedInput.substring(end + 1)}`
-        i = strippedInput.length;
-      }
-    }
-  }
-
-  return strippedInput;
-}
 
 const parsedInput = computed(() => {
   let parsed = inputState.input;
