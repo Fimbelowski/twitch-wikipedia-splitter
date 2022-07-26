@@ -8,6 +8,8 @@ import { default as ChunkingBehaviors } from './types/ChunkingBehaviors';
 import { default as removeParentheticals } from './utilities/removeParentheticals';
 import { default as chunkText } from './utilities/chunkText';
 
+const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
+
 const inputState = reactive({
   input: '',
   removeCitations: true,
@@ -18,12 +20,11 @@ const inputState = reactive({
   balkingDistance: 100,
 });
 
-const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
-
 const outputState = reactive({
   autoSelectNextChunkOnCopy: true,
   selectedChunkIndex: 0,
 });
+const outputLabel = computed(() => `Output (${outputState.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 
 watch(
   () => inputState,
@@ -34,9 +35,6 @@ watch(
     deep: true,
   },
 );
-
-const outputLabel = computed(() => `Output (${outputState.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
-const selectedChunk = computed(() => chunkedParsedInput.value[outputState.selectedChunkIndex]);
 
 const parsedInput = computed(() => {
   let parsed = inputState.input;
@@ -68,7 +66,10 @@ const chunkedParsedInput = computed(() => chunkText(
   inputState.balkingDistance,
 ));
 
+const selectedChunk = computed(() => chunkedParsedInput.value[outputState.selectedChunkIndex]);
 const previousChunkDisabled = computed(() => outputState.selectedChunkIndex === 0);
+const nextChunkDisabled = computed(() => outputState.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
+
 function selectPreviousChunk() {
   if (previousChunkDisabled.value) {
     return;
@@ -88,8 +89,6 @@ function selectNextChunk() {
 function copyChunkToClipboard() {
   outputTextarea.value?.copyToClipboard();
 }
-
-const nextChunkDisabled = computed(() => outputState.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
 
 function maybeSelectNextChunk() {
   if (outputState.autoSelectNextChunkOnCopy) {
