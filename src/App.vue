@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { default as ChunkingBehaviors } from './ChunkingBehaviors';
-console.log(ChunkingBehaviors);
+import { reactive } from 'vue';
+import BaseTextarea from './components/BaseTextarea.vue';
+
+const inputState = reactive({
+  input: '',
+});
 </script>
 
 <template>
-  <div/>
+  <BaseTextarea
+    id="input"
+    label="Input"
+    v-model="inputState.input"
+  />
 </template>
