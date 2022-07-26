@@ -2,12 +2,14 @@
 import { reactive } from 'vue';
 import BaseTextarea from './components/BaseTextarea.vue';
 import CheckboxInput from './components/CheckboxInput.vue';
+import NumberInput from './components/NumberInput.vue';
 
 const inputState = reactive({
   input: '',
   removeCitations: true,
   removeLineTerminators: true,
   removeParentheticals : true,
+  maxChunkSize: 500,
 });
 </script>
 
@@ -31,5 +33,11 @@ const inputState = reactive({
     id="remove-parentheticals"
     v-model="inputState.removeParentheticals"
     label="Remove Parentheticals"
+  />
+  <NumberInput
+    id="max-chunk-size"
+    v-model="inputState.maxChunkSize"
+    label="Maximum Chunk Size"
+    :min="1"
   />
 </template>
