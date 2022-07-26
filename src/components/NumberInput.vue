@@ -1,19 +1,20 @@
 <template>
-  <BaseInput
+  <label
+    :for="id"
+  >
+    {{ label }}
+  </label>
+  <input
     :id="id"
-    :label="label"
     :max="max"
     :min="min"
-    :model-value="modelValueAsString"
     type="number"
-    @update:model-value="onUpdateModelValue"
-  />
+    @input="onInput"
+    :value="modelValue"
+  >
 </template>
 
 <script setup lang="ts">
-import BaseInput from './BaseInput.vue';
-import { computed } from 'vue';
-
 const props = defineProps<{
   id: string,
   label: string,
@@ -26,13 +27,8 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void,
 }>();
 
-const modelValueAsString = computed(() => props.modelValue.toString());
-
-function onUpdateModelValue(value: string | boolean) {
-  if (typeof value === 'boolean') {
-    return;
-  }
-
-  emit('update:modelValue', parseInt(value, 10));
+function onInput(event: Event) {
+  const target = event.target as HTMLInputElement;
+  emit('update:modelValue', parseInt(target.value));
 }
 </script>

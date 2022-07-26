@@ -1,17 +1,21 @@
 <template>
-  <BaseInput
-    :id="id"
-    :label="label"
-    :model-value="modelValue"
-    type="checkbox"
-    @update:model-value="onUpdateModelValue"
-  />
+  <div>
+    <input
+      :id="id"
+      type="checkbox"
+      @change="onChange"
+      :checked="checked"
+    >
+    <label
+      :for="id"
+    >
+      {{ label }}
+    </label>
+  </div>
 </template>
 
 <script setup lang="ts">
-import BaseInput from './BaseInput.vue';
-
-defineProps<{
+const props = defineProps<{
   id: string,
   label: string,
   modelValue: boolean,
@@ -21,11 +25,10 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void,
 }>();
 
-function onUpdateModelValue(value: boolean | string) {
-  if (typeof value === 'string') {
-    return;
-  }
+const checked = props.modelValue;
 
-  emit('update:modelValue', value);
+function onChange(event: Event) {
+  const target = event.target as HTMLInputElement;
+  emit('update:modelValue', target.checked);
 }
 </script>

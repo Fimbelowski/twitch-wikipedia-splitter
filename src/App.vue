@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
-import BaseTextarea from './components/BaseTextarea.vue';
+import TextareaInput from './components/TextareaInput.vue';
 import CheckboxInput from './components/CheckboxInput.vue';
 import NumberInput from './components/NumberInput.vue';
 import BaseSelect from './components/BaseSelect.vue';
@@ -16,7 +16,7 @@ const inputState = reactive({
   balkingDistance: 100,
 });
 
-const outputTextarea = ref<InstanceType<typeof BaseTextarea> | null>(null);
+const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
 
 const outputState = reactive({
   autoSelectNextChunkOnCopy: true,
@@ -185,7 +185,7 @@ function maybeSelectNextChunk() {
 
 <template>
   <div class="input">
-    <BaseTextarea
+    <TextareaInput
       id="input"
       label="Input"
       v-model="inputState.input"
@@ -226,7 +226,7 @@ function maybeSelectNextChunk() {
     />
   </div>
   <div class="output">
-    <BaseTextarea
+    <TextareaInput
       id="output"
       ref="outputTextarea"
       :label="outputLabel"
