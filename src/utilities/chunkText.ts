@@ -1,17 +1,16 @@
+import { ChunkingBehavior } from "../types/ChunkingBehavior";
+
+const hardSentenceBoundaryRegExp = /[.?!] /gm;
+const softSentenceBoundaryRegExp = /[,;-] /gm;
+
 export function chunkText(
   input: string,
   maxChunkSize: number,
   chunkingBehavior: string,
   balkingDistance: number
 ) {
-  const hardSentenceBoundaryRegExp = /[.?!] /gm;
-  const softSentenceBoundaryRegExp = /[,;-] /gm;
-
-  if (
-    chunkingBehavior === 'none'
-    || input === ''
-    ) {
-    return [input];
+  if (input === '') {
+    return [''];
   }
 
   let remainingInput = input.trim();
@@ -27,13 +26,13 @@ export function chunkText(
     let tentativeEndIndex = rawChunk.length - 1;
     let distance = Infinity;
 
-    if (chunkingBehavior === 'sentenceBoundary') {
+    if (chunkingBehavior === ChunkingBehavior.sentenceBoundary) {
       let matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
       let nextMatch = matches.pop();
 
       if (nextMatch !== undefined) {
         tentativeEndIndex = nextMatch.index || Infinity;
-        distance = 500 - tentativeEndIndex + 1;
+        distance = maxChunkSize - tentativeEndIndex + 1;
       }
 
       if (distance > balkingDistance) {
@@ -42,21 +41,27 @@ export function chunkText(
 
         if (nextMatch !== undefined) {
           tentativeEndIndex = nextMatch.index || Infinity;
-          distance = 500 - tentativeEndIndex + 1;
+          distance = maxChunkSize - tentativeEndIndex + 1;
         }
       }
     }
 
     if (
-      chunkingBehavior === 'wordBoundary'
+      chunkingBehavior === ChunkingBehavior.wordBoundary
       || distance > balkingDistance
     ) {
       if (rawChunk.includes(' ')) {
         tentativeEndIndex = rawChunk.lastIndexOf(' ');
+        distance = maxChunkSize - tentativeEndIndex + 1;
       }
     }
 
-    chunks.push(rawChunk.substring(0, tentativeEndIndex + 1));
+    if (distance > balkingDistance) {
+      tentativeEndIndex = rawChunk.length - 1;
+    }
+
+    chunks.push(rawChunk.substring(0, tentativeEndIndex + 1).trim());
+
     remainingInput = remainingInput
       .substring(tentativeEndIndex + 1)
       .trim();
