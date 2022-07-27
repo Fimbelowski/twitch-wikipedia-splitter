@@ -3,8 +3,8 @@ import { computed, reactive, ref, watch } from 'vue';
 import { useStore } from '../store/useStore';
 import CheckboxInput from './CheckboxInput.vue';
 import TextareaInput from './TextareaInput.vue';
-import { default as removeParentheticals } from '../utilities/removeParentheticals';
-import { default as chunkText } from '../utilities/chunkText';
+import { removeParentheticals } from '../utilities/removeParentheticals';
+import { chunkText } from '../utilities/chunkText';
 
 const store = useStore();
 

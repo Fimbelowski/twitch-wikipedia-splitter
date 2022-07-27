@@ -1,4 +1,4 @@
-export default function chunkText(
+export function chunkText(
   input: string,
   maxChunkSize: number,
   chunkingBehavior: string,

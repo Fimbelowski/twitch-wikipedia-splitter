@@ -1,4 +1,4 @@
-export default function removeParentheticals(input: string) {
+export function removeParentheticals(input: string) {
   let strippedInput = input;
 
   for (let i = strippedInput.length - 1; i > -1; i--) {
