@@ -4,10 +4,10 @@ import CheckboxInput from './CheckboxInput.vue';
 import NumberInput from './NumberInput.vue';
 import BaseSelect from './BaseSelect.vue';
 import { useStore } from '../store/useStore';
-import { default as ChunkingBehaviors } from '../types/ChunkingBehaviors';
+import { default as ChunkingBehavior } from '../types/ChunkingBehavior';
 
 const store = useStore();
-const chunkingBehaviorOptions = Object.values(ChunkingBehaviors);
+const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
 </script>
 
 <template>

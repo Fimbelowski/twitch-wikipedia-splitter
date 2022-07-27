@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { default as ChunkingBehaviors } from '../types/ChunkingBehaviors';
+import { default as ChunkingBehavior } from '../types/ChunkingBehavior';
 
 export const useStore = defineStore('main', () => {
   const input = ref('');
@@ -10,7 +10,7 @@ export const useStore = defineStore('main', () => {
   const removeParentheticals = ref(true);
 
   const maxChunkSize = ref(500);
-  const chunkingBehavior = ref(ChunkingBehaviors.sentenceBoundary);
+  const chunkingBehavior = ref(ChunkingBehavior.sentenceBoundary);
   const balkingDistance = ref(100);
 
   return {
