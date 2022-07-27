@@ -5,6 +5,7 @@ import CheckboxInput from './CheckboxInput.vue';
 import TextareaInput from './TextareaInput.vue';
 import { removeParentheticals } from '../utilities/removeParentheticals';
 import { chunkText } from '../utilities/chunkText';
+import { ChunkingBehavior } from '../types/ChunkingBehavior';
 
 const store = useStore();
 
@@ -48,13 +49,18 @@ watch(
     return parsed.trim();
   });
 
-  const chunkedParsedInput = computed(() => chunkText(
-    parsedInput.value,
-    store.maxChunkSize,
-    store.chunkingBehavior,
-    store.balkingDistance,
-  ));
+  const chunkedParsedInput = computed(() => {
+    if (store.chunkingBehavior === ChunkingBehavior.none) {
+      return [parsedInput.value];
+    }
 
+    return chunkText(
+      parsedInput.value,
+      store.maxChunkSize,
+      store.chunkingBehavior,
+      store.balkingDistance,
+    );
+  });
 
 const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 
