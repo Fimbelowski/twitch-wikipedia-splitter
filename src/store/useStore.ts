@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { default as ChunkingBehavior } from '../types/ChunkingBehavior';
+import { ChunkingBehavior } from '../types/ChunkingBehavior';
 
 export const useStore = defineStore('main', () => {
   const input = ref('');

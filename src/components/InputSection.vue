@@ -4,7 +4,7 @@ import CheckboxInput from './CheckboxInput.vue';
 import NumberInput from './NumberInput.vue';
 import SelectInput from './SelectInput.vue';
 import { useStore } from '../store/useStore';
-import { default as ChunkingBehavior } from '../types/ChunkingBehavior';
+import { ChunkingBehavior } from '../types/ChunkingBehavior';
 
 const store = useStore();
 const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
