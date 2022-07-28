@@ -38,10 +38,10 @@ describe('CheckboxInput.vue', () => {
     expect(label.text()).toBe(props.label);
   });
 
-  it('should emit an "update:modelValue" event when the input is changed', async () => {
+  it('should emit an "update:modelValue" event when the value of the input is changed', async () => {
     const input = wrapper.get('input');
 
-    await input.trigger('change');
+    await input.setValue(true);
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
   });
