@@ -19,6 +19,12 @@ describe('CheckboxInput.vue', () => {
     wrapper.unmount
   });
 
+  it('should render an input of type "checkbox"', () => {
+    const input = wrapper.get('input');
+
+    expect(input.attributes('type')).toBe('checkbox');
+  });
+
   it('should render an input and a label, where the id and name properties respectively match', () => {
     const input = wrapper.get('input');
     const label = wrapper.get('label');
