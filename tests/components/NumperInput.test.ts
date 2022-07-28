@@ -27,7 +27,7 @@ describe('NumberInput.vue', () => {
     expect(input.attributes('type')).toBe('number');
   });
 
-  it('should render an input and a label, where the id and name properties respectively match', () => {
+  it('should render an input and a label, where the id and for properties respectively match', () => {
     const input = wrapper.get('input');
     const label = wrapper.get('label');
 
