@@ -27,6 +27,12 @@ describe('SelectInput.vue', () => {
     expect(select.attributes('id')).toBe(label.attributes('for'));
   });
 
+  it('should render a label with text equal to the "label" prop', () => {
+    const label = wrapper.get('label');
+
+    expect(label.text()).toBe(props.label);
+  });
+
   it('should render an option for each element in the "options" prop', () => {
     const options = wrapper.findAll('option');
 
