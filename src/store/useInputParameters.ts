@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { ChunkingBehavior } from '../types/ChunkingBehavior';
 
-export const useInput = defineStore('main', () => {
+export const useInputParameters = defineStore('main', () => {
   const input = ref('');
 
   const removeCitations = ref(true);

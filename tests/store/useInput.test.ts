@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { useInput } from '../../src/store/useInput';
+import { useInputParameters } from '../../src/store/useInputParameters';
 import { setActivePinia, createPinia } from 'pinia';
 import { ChunkingBehavior } from '../../src/types/ChunkingBehavior';
 
-describe('useInput.ts', () => {
+describe('useInputParameters.ts', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   it('updates input', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const intitialValue = input.input;
     const newValue = 'Lorem ipsum...';
 
@@ -20,7 +20,7 @@ describe('useInput.ts', () => {
   });
 
   it('updates removeCitations', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const initialValue = input.removeCitations;
     const newValue = !initialValue;
 
@@ -31,7 +31,7 @@ describe('useInput.ts', () => {
   });
 
   it('updates removeLineTerminators', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const initialValue = input.removeLineTerminators;
     const newValue = !initialValue;
 
@@ -42,7 +42,7 @@ describe('useInput.ts', () => {
   });
 
   it('updates removeParentheticals', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const initialValue = input.removeParentheticals;
     const newValue = !initialValue;
 
@@ -53,7 +53,7 @@ describe('useInput.ts', () => {
   });
 
   it('updates maxChunkSize', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const initialValue = input.maxChunkSize;
     const newValue = 1;
 
@@ -64,7 +64,7 @@ describe('useInput.ts', () => {
   });
 
   it('updates chunkingBehavior', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const initialValue = input.chunkingBehavior;
     const newValue = ChunkingBehavior.chunkSize;
 
@@ -75,7 +75,7 @@ describe('useInput.ts', () => {
   });
 
   it('updates balkingDistance', () => {
-    const input = useInput();
+    const input = useInputParameters();
     const initialValue = input.balkingDistance;
     const newValue = 1;
 
