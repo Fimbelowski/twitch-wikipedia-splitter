@@ -81,11 +81,11 @@ describe('InputSection.vue', () => {
     expect(inputParameters.updateChunkingBehavior).toHaveBeenCalledOnce();
   });
 
-  it('should call updateBalkingDistance when the "Balking Distance" input has been changes', async () => {
+  it('should call updateBalkingDistance when the "Balking Distance" input has been changed', async () => {
     const inputParameters = useInputParameters();
     const input = wrapper.get('input#balking-distance');
 
-    await input.trigger('change');
+    await input.trigger('input');
 
     expect(inputParameters.updateBalkingDistance).toHaveBeenCalledOnce();
   });
