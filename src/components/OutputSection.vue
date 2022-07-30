@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
-import { useStore } from '../store/useStore';
+import { useInput } from '../store/useInput';
 import CheckboxInput from './CheckboxInput.vue';
 import TextareaInput from './TextareaInput.vue';
 import { removeParentheticals } from '../utilities/removeParentheticals';
 import { chunkText } from '../utilities/chunkText';
 import { ChunkingBehavior } from '../types/ChunkingBehavior';
 
-const store = useStore();
+const store = useInput();
 
 const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
 

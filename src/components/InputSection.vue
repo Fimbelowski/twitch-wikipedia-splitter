@@ -3,10 +3,10 @@ import TextareaInput from './TextareaInput.vue';
 import CheckboxInput from './CheckboxInput.vue';
 import NumberInput from './NumberInput.vue';
 import SelectInput from './SelectInput.vue';
-import { useStore } from '../store/useStore';
+import { useInput } from '../store/useInput';
 import { ChunkingBehavior } from '../types/ChunkingBehavior';
 
-const store = useStore();
+const store = useInput();
 const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
 </script>
 
