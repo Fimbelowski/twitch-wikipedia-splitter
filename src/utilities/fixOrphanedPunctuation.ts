@@ -1,3 +1,3 @@
 export function fixOrphanedPunctuation(input: string) {
-  return input.replace(/ ([.,])/gm, '$1');
+  return input.replace(/ ([.,])/g, '$1');
 }
