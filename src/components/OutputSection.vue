@@ -6,6 +6,7 @@ import TextareaInput from './TextareaInput.vue';
 import { removeParentheticals } from '../utilities/removeParentheticals';
 import { chunkText } from '../utilities/chunkText';
 import { ChunkingBehavior } from '../types/ChunkingBehavior';
+import { removeLineTerminators } from '../utilities/removeLineTerminators';
 
 const store = useInputParameters();
 
@@ -37,8 +38,9 @@ watch(
       parsed = parsed.replace(/\[[^\]]*\]/gm, '');;
     }
   
-    // Remove line terminators
-    parsed = parsed.replace(/[\n\r]/gm, ' ');
+    if (store.removeLineTerminators) {
+      parsed = removeLineTerminators(parsed);
+    }
   
     // Trim consecutive spaces
     parsed = parsed.replace(/ {2,}/gm, ' ');
