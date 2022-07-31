@@ -7,6 +7,7 @@ import { removeParentheticals } from '../utilities/removeParentheticals';
 import { chunkText } from '../utilities/chunkText';
 import { ChunkingBehavior } from '../types/ChunkingBehavior';
 import { removeLineTerminators } from '../utilities/removeLineTerminators';
+import { removeCitations } from '../utilities/removeCitations';
 
 const store = useInputParameters();
 
@@ -35,7 +36,7 @@ watch(
     }
   
     if (store.removeCitations) {
-      parsed = parsed.replace(/\[[^\]]*\]/gm, '');;
+      parsed = removeCitations(parsed);
     }
   
     if (store.removeLineTerminators) {
