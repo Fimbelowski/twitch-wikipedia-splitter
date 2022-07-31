@@ -9,6 +9,7 @@ import { ChunkingBehavior } from '../types/ChunkingBehavior';
 import { removeLineTerminators } from '../utilities/removeLineTerminators';
 import { removeCitations } from '../utilities/removeCitations';
 import { truncateConsecutiveSpaces } from '../utilities/truncateConsecutiveSpaces';
+import { fixOrphanedPunctuation } from '../utilities/fixOrphanedPunctuation';
 
 const store = useInputParameters();
 
@@ -46,8 +47,7 @@ watch(
   
     parsed = truncateConsecutiveSpaces(parsed);
   
-    // Fix orphaned punctuation
-    parsed = parsed.replace(/ ([.,])/gm, '$1');
+    parsed = fixOrphanedPunctuation(parsed);
   
     return parsed.trim();
   });
