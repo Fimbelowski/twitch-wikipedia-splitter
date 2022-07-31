@@ -8,6 +8,7 @@ import { chunkText } from '../utilities/chunkText';
 import { ChunkingBehavior } from '../types/ChunkingBehavior';
 import { removeLineTerminators } from '../utilities/removeLineTerminators';
 import { removeCitations } from '../utilities/removeCitations';
+import { truncateConsecutiveSpaces } from '../utilities/truncateConsecutiveSpaces';
 
 const store = useInputParameters();
 
@@ -43,8 +44,7 @@ watch(
       parsed = removeLineTerminators(parsed);
     }
   
-    // Trim consecutive spaces
-    parsed = parsed.replace(/ {2,}/gm, ' ');
+    parsed = truncateConsecutiveSpaces(parsed);
   
     // Fix orphaned punctuation
     parsed = parsed.replace(/ ([.,])/gm, '$1');
