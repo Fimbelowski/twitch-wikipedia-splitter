@@ -1,3 +1,3 @@
 export function removeCitations(input: string) {
-  return input.replace(/\[[^\]]*\]/gm, '');
+  return input.replace(/\[[^\]]*\]/g, '');
 }
