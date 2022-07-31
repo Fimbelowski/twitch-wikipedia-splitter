@@ -72,18 +72,10 @@ const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
 const nextChunkDisabled = computed(() => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
 
 function selectPreviousChunk() {
-  if (previousChunkDisabled.value) {
-    return;
-  }
-
   state.selectedChunkIndex--;
 }
 
 function selectNextChunk() {
-  if (nextChunkDisabled.value) {
-    return;
-  }
-
   state.selectedChunkIndex++;
 }
 
