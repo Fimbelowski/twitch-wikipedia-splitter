@@ -11,7 +11,7 @@ import { removeCitations } from '../utilities/removeCitations';
 import { truncateConsecutiveSpaces } from '../utilities/truncateConsecutiveSpaces';
 import { fixOrphanedPunctuation } from '../utilities/fixOrphanedPunctuation';
 
-const store = useInputParameters();
+const inputParameters = useInputParameters();
 
 const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
 
@@ -21,7 +21,7 @@ const state = reactive({
 });
 
 watch(
-  () => store,
+  () => inputParameters,
   () => {
     state.selectedChunkIndex = 0;
   },
@@ -31,17 +31,17 @@ watch(
 );
 
   const parsedInput = computed(() => {
-    let parsed = store.input;
+    let parsed = inputParameters.input;
 
-    if (store.removeParentheticals) {
+    if (inputParameters.removeParentheticals) {
       parsed = removeParentheticals(parsed);
     }
   
-    if (store.removeCitations) {
+    if (inputParameters.removeCitations) {
       parsed = removeCitations(parsed);
     }
   
-    if (store.removeLineTerminators) {
+    if (inputParameters.removeLineTerminators) {
       parsed = removeLineTerminators(parsed);
     }
   
@@ -53,15 +53,15 @@ watch(
   });
 
   const chunkedParsedInput = computed(() => {
-    if (store.chunkingBehavior === ChunkingBehavior.none) {
+    if (inputParameters.chunkingBehavior === ChunkingBehavior.none) {
       return [parsedInput.value];
     }
 
     return chunkText(
       parsedInput.value,
-      store.maxChunkSize,
-      store.chunkingBehavior,
-      store.balkingDistance,
+      inputParameters.maxChunkSize,
+      inputParameters.chunkingBehavior,
+      inputParameters.balkingDistance,
     );
   });
 
