@@ -1,4 +1,4 @@
-import { removeLineTerminators } from '../../src/utilities/removeLineTerminators';
+import { removeLineTerminators } from '@/utilities/removeLineTerminators';
 import { describe, expect, it } from 'vitest';
 
 describe('removeLineTerminators.ts', () => {
