@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { removeParentheticals } from '../../src/utilities/removeParentheticals';
+import { removeParentheticals } from '@/utilities/removeParentheticals';
 
 describe('removeParentheticals.ts', () => {
   it('returns an empty string when an empty string is passed in', () => {

@@ -1,4 +1,4 @@
-import { ChunkingBehavior } from "../types/ChunkingBehavior";
+import { ChunkingBehavior } from "@/types/ChunkingBehavior";
 
 const hardSentenceBoundaryRegExp = /[.?!] /gm;
 const softSentenceBoundaryRegExp = /[,;-] /gm;

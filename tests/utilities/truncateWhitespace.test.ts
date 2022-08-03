@@ -1,4 +1,4 @@
-import { truncateConsecutiveSpaces } from '../../src/utilities/truncateConsecutiveSpaces';
+import { truncateConsecutiveSpaces } from '@/utilities/truncateConsecutiveSpaces';
 import { describe, expect, it } from 'vitest';
 
 describe('truncateConsecutiveSpaces.ts', () => {

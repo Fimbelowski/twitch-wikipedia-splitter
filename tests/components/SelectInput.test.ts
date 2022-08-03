@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import SelectInput from '../../src/components/SelectInput.vue';
+import SelectInput from '@/components/SelectInput.vue';
 
 describe('SelectInput.vue', () => {
   const props = {

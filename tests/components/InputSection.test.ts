@@ -1,8 +1,8 @@
-import InputSection from '../../src/components/InputSection.vue';
+import InputSection from '@/components/InputSection.vue';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import { useInputParameters } from '../../src/store/useInputParameters';
+import { useInputParameters } from '@/store/useInputParameters';
 
 describe('InputSection.vue', () => {
   let wrapper = mount(InputSection, {

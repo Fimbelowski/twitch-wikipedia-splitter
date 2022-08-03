@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
-import CheckboxInput from '../../src/components/CheckboxInput.vue';
+import CheckboxInput from '@/components/CheckboxInput.vue';
 
 describe('CheckboxInput.vue', () => {
   const props = {
