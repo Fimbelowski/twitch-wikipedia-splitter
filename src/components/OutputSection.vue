@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue';
-import { useStore } from '../store/useStore';
+import { useInputParameters } from '../store/useInputParameters';
 import CheckboxInput from './CheckboxInput.vue';
 import TextareaInput from './TextareaInput.vue';
 import { removeParentheticals } from '../utilities/removeParentheticals';
 import { chunkText } from '../utilities/chunkText';
+import { ChunkingBehavior } from '../types/ChunkingBehavior';
+import { removeLineTerminators } from '../utilities/removeLineTerminators';
+import { removeCitations } from '../utilities/removeCitations';
+import { truncateConsecutiveSpaces } from '../utilities/truncateConsecutiveSpaces';
+import { fixOrphanedPunctuation } from '../utilities/fixOrphanedPunctuation';
 
-const store = useStore();
+const inputParameters = useInputParameters();
 
 const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
 
@@ -16,7 +21,7 @@ const state = reactive({
 });
 
 watch(
-  () => store,
+  () => inputParameters,
   () => {
     state.selectedChunkIndex = 0;
   },
@@ -26,35 +31,39 @@ watch(
 );
 
   const parsedInput = computed(() => {
-    let parsed = store.input;
+    let parsed = inputParameters.input;
 
-    if (store.removeParentheticals) {
+    if (inputParameters.removeParentheticals) {
       parsed = removeParentheticals(parsed);
     }
   
-    if (store.removeCitations) {
-      parsed = parsed.replace(/\[[^\]]*\]/gm, '');;
+    if (inputParameters.removeCitations) {
+      parsed = removeCitations(parsed);
     }
   
-    // Remove line terminators
-    parsed = parsed.replace(/[\n\r]/gm, ' ');
+    if (inputParameters.removeLineTerminators) {
+      parsed = removeLineTerminators(parsed);
+    }
   
-    // Trim consecutive spaces
-    parsed = parsed.replace(/ {2,}/gm, ' ');
+    parsed = truncateConsecutiveSpaces(parsed);
   
-    // Fix orphaned punctuation
-    parsed = parsed.replace(/ ([.,])/gm, '$1');
+    parsed = fixOrphanedPunctuation(parsed);
   
     return parsed.trim();
   });
 
-  const chunkedParsedInput = computed(() => chunkText(
-    parsedInput.value,
-    store.maxChunkSize,
-    store.chunkingBehavior,
-    store.balkingDistance,
-  ));
+  const chunkedParsedInput = computed(() => {
+    if (inputParameters.chunkingBehavior === ChunkingBehavior.none) {
+      return [parsedInput.value];
+    }
 
+    return chunkText(
+      parsedInput.value,
+      inputParameters.maxChunkSize,
+      inputParameters.chunkingBehavior,
+      inputParameters.balkingDistance,
+    );
+  });
 
 const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 
@@ -63,18 +72,10 @@ const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
 const nextChunkDisabled = computed(() => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
 
 function selectPreviousChunk() {
-  if (previousChunkDisabled.value) {
-    return;
-  }
-
   state.selectedChunkIndex--;
 }
 
 function selectNextChunk() {
-  if (nextChunkDisabled.value) {
-    return;
-  }
-
   state.selectedChunkIndex++;
 }
 
