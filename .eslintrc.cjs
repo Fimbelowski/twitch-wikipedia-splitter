@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'airbnb-typescript/base',
   ],
   overrides: [
     {
@@ -16,7 +17,9 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
+    extraFileExtensions: ['.vue'],
     parser: '@typescript-eslint/parser',
+    project: './tsconfig.eslint.json',
     sourceType: 'module',
   },
   plugins: [
