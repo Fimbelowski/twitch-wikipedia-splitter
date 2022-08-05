@@ -1,4 +1,4 @@
-import { removeCitations } from '@/utilities/removeCitations';
+import removeCitations from '@/utilities/removeCitations';
 import { describe, expect, it } from 'vitest';
 
 describe('removeCitations.ts', () => {

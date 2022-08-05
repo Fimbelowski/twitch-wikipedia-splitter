@@ -4,6 +4,6 @@ import OutputSection from '@/components/OutputSection.vue';
 </script>
 
 <template>
-  <InputSection/>
-  <OutputSection/>
+  <InputSection />
+  <OutputSection />
 </template>

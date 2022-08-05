@@ -1,4 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import {
+  describe, it, expect, beforeEach, afterEach,
+} from 'vitest';
 import { mount } from '@vue/test-utils';
 import NumberInput from '@/components/NumberInput.vue';
 
@@ -12,7 +14,7 @@ describe('NumberInput.vue', () => {
   };
 
   let wrapper = mount(NumberInput, { props });
-  
+
   beforeEach(() => {
     wrapper = mount(NumberInput, { props });
   });

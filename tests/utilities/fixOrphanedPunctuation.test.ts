@@ -1,4 +1,4 @@
-import { fixOrphanedPunctuation } from '@/utilities/fixOrphanedPunctuation';
+import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
 import { describe, expect, it } from 'vitest';
 
 describe('fixOrphanedPunctuation.ts', () => {

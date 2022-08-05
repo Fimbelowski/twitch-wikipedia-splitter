@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { chunkText } from '@/utilities/chunkText';
-import { ChunkingBehavior } from '@/types/ChunkingBehavior';
+import chunkText from '@/utilities/chunkText';
+import ChunkingBehavior from '@/types/ChunkingBehavior';
 
 const hardSentenceBoundaryRegExp = /[.?!]/;
 const softSentenceBoundaryRegExp = /[,;-]/;
@@ -34,7 +34,8 @@ describe('chunkTest.ts', () => {
       Infinity,
     );
 
-    // When testing to see that a chunk ends on a specific type of character the last character of the last chunk cannot be guaranteed, so we test all chunks except the last.
+    // When testing to see that a chunk ends on a specific type of character the last character of
+    // the last chunk cannot be guaranteed, so we test all chunks except the last.
     chunks = chunks.slice(0, -1);
 
     expect(
@@ -56,7 +57,8 @@ describe('chunkTest.ts', () => {
       chunks.every((chunk) => {
         const lastCharacter = chunk.slice(-1);
 
-        return hardSentenceBoundaryRegExp.test(lastCharacter) || softSentenceBoundaryRegExp.test(lastCharacter);
+        return hardSentenceBoundaryRegExp.test(lastCharacter)
+          || softSentenceBoundaryRegExp.test(lastCharacter);
       }),
     );
   });
@@ -73,7 +75,8 @@ describe('chunkTest.ts', () => {
       chunks.every((chunk) => {
         const lastCharacter = chunk.slice(-1);
 
-        return hardSentenceBoundaryRegExp.test(lastCharacter) || softSentenceBoundaryRegExp.test(lastCharacter);
+        return hardSentenceBoundaryRegExp.test(lastCharacter)
+          || softSentenceBoundaryRegExp.test(lastCharacter);
       }),
     ).toBe(false);
   });

@@ -9,13 +9,13 @@
     :max="max"
     :min="min"
     type="number"
-    @input="onInput"
     :value="modelValue"
+    @input="onInput"
   >
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   id: string,
   label: string,
   max?: number,
@@ -23,12 +23,10 @@ const props = defineProps<{
   modelValue: number,
 }>();
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: number): void,
-}>();
+const emit = defineEmits<{ (e: 'update:modelValue', value: number): void }>();
 
 function onInput(event: Event) {
   const target = event.target as HTMLInputElement;
-  emit('update:modelValue', parseInt(target.value));
+  emit('update:modelValue', parseInt(target.value, 10));
 }
 </script>

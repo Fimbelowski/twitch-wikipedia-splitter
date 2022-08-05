@@ -1,13 +1,13 @@
-import { ChunkingBehavior } from "@/types/ChunkingBehavior";
+import ChunkingBehavior from '@/types/ChunkingBehavior';
 
 const hardSentenceBoundaryRegExp = /[.?!] /gm;
 const softSentenceBoundaryRegExp = /[,;-] /gm;
 
-export function chunkText(
+export default function chunkText(
   input: string,
   maxChunkSize: number,
   chunkingBehavior: string,
-  balkingDistance: number
+  balkingDistance: number,
 ) {
   if (input === '') {
     return [''];

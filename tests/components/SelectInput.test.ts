@@ -1,4 +1,6 @@
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import {
+  describe, expect, it, beforeEach, afterEach,
+} from 'vitest';
 import { mount } from '@vue/test-utils';
 import SelectInput from '@/components/SelectInput.vue';
 
@@ -56,7 +58,7 @@ describe('SelectInput.vue', () => {
   it('should emit an "update:modelValue" event when the value of the select is changed.', async () => {
     const select = wrapper.get('select');
 
-    await wrapper.setValue('b');
+    await select.trigger('input');
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
   });
