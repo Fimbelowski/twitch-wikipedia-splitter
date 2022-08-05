@@ -88,7 +88,7 @@ function copyChunkToClipboard() {
 }
 
 function maybeSelectNextChunk() {
-  if (state.autoSelectNextChunkOnCopy) {
+  if (state.autoSelectNextChunkOnCopy && !nextChunkDisabled.value) {
     selectNextChunk();
   }
 }
