@@ -13,9 +13,20 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
+    'import',
     'vue',
     '@typescript-eslint',
   ],
   rules: {
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        project: './tsconfig.json',
+      },
+    },
   },
 };
