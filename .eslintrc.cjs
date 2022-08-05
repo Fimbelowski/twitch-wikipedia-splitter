@@ -13,6 +13,9 @@ module.exports = {
         'plugin:vue/vue3-recommended',
       ],
       files: ['src/**/*.vue'],
+      rules: {
+        'no-spaced-func': 'off',
+      },
     },
   ],
   parserOptions: {
