@@ -4,12 +4,15 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:vue/vue3-recommended',
     'airbnb-base',
+    'airbnb-typescript/base',
+    'plugin:vue/vue3-recommended',
+    '@vue/eslint-config-typescript',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
+    project: ['./tsconfig.eslint.json'],
     sourceType: 'module',
   },
   plugins: [
