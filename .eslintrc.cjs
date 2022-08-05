@@ -4,8 +4,15 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:vue/vue3-recommended',
     'airbnb-base',
+  ],
+  overrides: [
+    {
+      extends: [
+        'plugin:vue/vue3-recommended',
+      ],
+      files: ['src/**/*.vue'],
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
