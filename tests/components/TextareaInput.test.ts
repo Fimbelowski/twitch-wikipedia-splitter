@@ -1,4 +1,6 @@
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import {
+  describe, expect, it, beforeEach, afterEach,
+} from 'vitest';
 import { mount } from '@vue/test-utils';
 import TextareaInput from '@/components/TextareaInput.vue';
 

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { ChunkingBehavior } from '@/types/ChunkingBehavior';
+import ChunkingBehavior from '@/types/ChunkingBehavior';
 
-export const useInputParameters = defineStore('inputParameters', () => {
+const useInputParameters = defineStore('inputParameters', () => {
   const input = ref('');
 
   const removeCitations = ref(true);
@@ -58,3 +58,5 @@ export const useInputParameters = defineStore('inputParameters', () => {
     updateBalkingDistance,
   };
 });
+
+export default useInputParameters;

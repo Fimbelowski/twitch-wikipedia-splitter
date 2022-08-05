@@ -29,8 +29,7 @@ defineProps<{
   readonly?: boolean,
 }>();
 
-const emit = defineEmits<{
-  (e: 'copy'): void,
+const emit = defineEmits<{ (e: 'copy'): void,
   (e: 'update:modelValue', value: string): void,
 }>();
 
@@ -42,7 +41,7 @@ function copyToClipboard() {
   textarea.value.select();
   textarea.value.setSelectionRange(0, 500);
   navigator.clipboard.writeText(textarea.value.value);
-  textarea.value.setSelectionRange(0,0);
+  textarea.value.setSelectionRange(0, 0);
 
   emit('copy');
 }

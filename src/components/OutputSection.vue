@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
-import { useInputParameters } from '@/store/useInputParameters';
-import CheckboxInput from './CheckboxInput.vue';
+import {
+  computed, reactive, ref, watch,
+} from 'vue';
+import useInputParameters from '@/store/useInputParameters';
+import removeParentheticals from '@/utilities/removeParentheticals';
+import chunkText from '@/utilities/chunkText';
+import ChunkingBehavior from '@/types/ChunkingBehavior';
+import removeLineTerminators from '@/utilities/removeLineTerminators';
+import removeCitations from '@/utilities/removeCitations';
+import truncateConsecutiveSpaces from '@/utilities/truncateConsecutiveSpaces';
+import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
 import TextareaInput from './TextareaInput.vue';
-import { removeParentheticals } from '@/utilities/removeParentheticals';
-import { chunkText } from '@/utilities/chunkText';
-import { ChunkingBehavior } from '@/types/ChunkingBehavior';
-import { removeLineTerminators } from '@/utilities/removeLineTerminators';
-import { removeCitations } from '@/utilities/removeCitations';
-import { truncateConsecutiveSpaces } from '@/utilities/truncateConsecutiveSpaces';
-import { fixOrphanedPunctuation } from '@/utilities/fixOrphanedPunctuation';
+import CheckboxInput from './CheckboxInput.vue';
 
 const inputParameters = useInputParameters();
 
@@ -30,53 +32,55 @@ watch(
   },
 );
 
-  const parsedInput = computed(() => {
-    let parsed = inputParameters.input;
+const parsedInput = computed(() => {
+  let parsed = inputParameters.input;
 
-    if (inputParameters.removeParentheticals) {
-      parsed = removeParentheticals(parsed);
-    }
-  
-    if (inputParameters.removeCitations) {
-      parsed = removeCitations(parsed);
-    }
-  
-    if (inputParameters.removeLineTerminators) {
-      parsed = removeLineTerminators(parsed);
-    }
-  
-    parsed = truncateConsecutiveSpaces(parsed);
-  
-    parsed = fixOrphanedPunctuation(parsed);
-  
-    return parsed.trim();
-  });
+  if (inputParameters.removeParentheticals) {
+    parsed = removeParentheticals(parsed);
+  }
 
-  const chunkedParsedInput = computed(() => {
-    if (inputParameters.chunkingBehavior === ChunkingBehavior.none) {
-      return [parsedInput.value];
-    }
+  if (inputParameters.removeCitations) {
+    parsed = removeCitations(parsed);
+  }
 
-    return chunkText(
-      parsedInput.value,
-      inputParameters.maxChunkSize,
-      inputParameters.chunkingBehavior,
-      inputParameters.balkingDistance,
-    );
-  });
+  if (inputParameters.removeLineTerminators) {
+    parsed = removeLineTerminators(parsed);
+  }
+
+  parsed = truncateConsecutiveSpaces(parsed);
+
+  parsed = fixOrphanedPunctuation(parsed);
+
+  return parsed.trim();
+});
+
+const chunkedParsedInput = computed(() => {
+  if (inputParameters.chunkingBehavior === ChunkingBehavior.none) {
+    return [parsedInput.value];
+  }
+
+  return chunkText(
+    parsedInput.value,
+    inputParameters.maxChunkSize,
+    inputParameters.chunkingBehavior,
+    inputParameters.balkingDistance,
+  );
+});
 
 const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 
 const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
 const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
-const nextChunkDisabled = computed(() => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1);
+const nextChunkDisabled = computed(
+  () => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1,
+);
 
 function selectPreviousChunk() {
-  state.selectedChunkIndex--;
+  state.selectedChunkIndex -= 1;
 }
 
 function selectNextChunk() {
-  state.selectedChunkIndex++;
+  state.selectedChunkIndex += 1;
 }
 
 function copyChunkToClipboard() {

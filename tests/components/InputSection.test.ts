@@ -1,8 +1,10 @@
 import InputSection from '@/components/InputSection.vue';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import {
+  describe, expect, it, beforeEach, afterEach,
+} from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
-import { useInputParameters } from '@/store/useInputParameters';
+import useInputParameters from '@/store/useInputParameters';
 
 describe('InputSection.vue', () => {
   let wrapper = mount(InputSection, {
@@ -42,7 +44,7 @@ describe('InputSection.vue', () => {
 
     await checkbox.trigger('change');
 
-    expect(inputParameters.updateRemoveCitations).toHaveBeenCalledOnce()
+    expect(inputParameters.updateRemoveCitations).toHaveBeenCalledOnce();
   });
 
   it('should call updateRemoveLineTerminators when the "Remove Line Terminators" checkbox is changed', async () => {
