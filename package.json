@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "lint": "npx eslint ./{src,tests}/**/* --ext .ts,.vue --fix --cache",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
