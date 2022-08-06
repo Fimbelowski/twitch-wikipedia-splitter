@@ -4,6 +4,16 @@ import OutputSection from '@/components/OutputSection.vue';
 </script>
 
 <template>
-  <InputSection />
-  <OutputSection />
+  <div class="flex">
+    <InputSection />
+    <OutputSection />
+  </div>
 </template>
+
+<style>
+.flex {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+</style>
