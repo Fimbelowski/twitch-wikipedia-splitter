@@ -85,9 +85,7 @@ function selectNextChunk() {
 
 function copyChunkToClipboard() {
   outputTextarea.value?.copyToClipboard();
-}
 
-function maybeSelectNextChunk() {
   if (state.autoSelectNextChunkOnCopy && !nextChunkDisabled.value) {
     selectNextChunk();
   }
@@ -102,7 +100,6 @@ function maybeSelectNextChunk() {
       :label="outputLabel"
       :model-value="selectedChunk"
       readonly
-      @copy="maybeSelectNextChunk"
     />
     <div
       class="output__controls"
