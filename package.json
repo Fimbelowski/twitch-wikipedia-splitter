@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "coverage": "vitest run --coverage",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "lint": "npx eslint ./{src,tests}/**/* --ext .ts,.vue --fix --cache",
