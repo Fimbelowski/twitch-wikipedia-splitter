@@ -1,5 +1,5 @@
 import {
-  describe, expect, it, beforeEach, afterEach,
+  describe, expect, it, beforeEach, afterEach, vi,
 } from 'vitest';
 import { mount } from '@vue/test-utils';
 import TextareaInput from '@/components/TextareaInput.vue';
@@ -50,5 +50,13 @@ describe('TextareaInput.vue', () => {
     await textarea.setValue('Hello World!');
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
+  });
+
+  it('should call document.execCommand() when the copyToClipboard method is called', () => {
+    document.execCommand = vi.fn(() => true);
+
+    wrapper.vm.copyToClipboard();
+
+    expect(document.execCommand).toHaveBeenCalled();
   });
 });
