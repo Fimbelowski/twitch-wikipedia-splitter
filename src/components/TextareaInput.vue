@@ -32,11 +32,7 @@ defineProps<{
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
 
 function copyToClipboard() {
-  if (textarea.value === null) {
-    return;
-  }
-
-  textarea.value.select();
+  textarea.value?.select();
   document.execCommand('copy');
 }
 
