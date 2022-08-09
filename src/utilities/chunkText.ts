@@ -30,8 +30,8 @@ export default function chunkText(
       let matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
       let nextMatch = matches.pop();
 
-      if (nextMatch !== undefined) {
-        tentativeEndIndex = nextMatch.index || Infinity;
+      if (nextMatch?.index !== undefined) {
+        tentativeEndIndex = nextMatch.index;
         distance = maxChunkSize - tentativeEndIndex + 1;
       }
 
@@ -39,8 +39,8 @@ export default function chunkText(
         matches = Array.from(rawChunk.matchAll(softSentenceBoundaryRegExp));
         nextMatch = matches.pop();
 
-        if (nextMatch !== undefined) {
-          tentativeEndIndex = nextMatch.index || Infinity;
+        if (nextMatch?.index !== undefined) {
+          tentativeEndIndex = nextMatch.index;
           distance = maxChunkSize - tentativeEndIndex + 1;
         }
       }
