@@ -27,10 +27,12 @@ module.exports = {
   },
   plugins: [
     'import',
+    'import-newlines',
     'vue',
     '@typescript-eslint',
   ],
   rules: {
+    'import-newlines/enforce': ['error', 1],
     'import/order': ['error', {
       groups: [
         'builtin',
