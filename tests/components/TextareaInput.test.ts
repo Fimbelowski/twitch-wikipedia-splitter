@@ -1,5 +1,5 @@
 import {
-  describe, expect, it, beforeEach, afterEach, vi,
+  afterEach, beforeEach, describe, expect, it, vi,
 } from 'vitest';
 import { mount } from '@vue/test-utils';
 

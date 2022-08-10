@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import useInputParameters from '@/store/useInputParameters';
-import ChunkingBehavior from '@/types/ChunkingBehavior';
-import TextareaInput from './TextareaInput.vue';
 import CheckboxInput from './CheckboxInput.vue';
+import ChunkingBehavior from '@/types/ChunkingBehavior';
 import NumberInput from './NumberInput.vue';
 import SelectInput from './SelectInput.vue';
+import TextareaInput from './TextareaInput.vue';
+import useInputParameters from '@/store/useInputParameters';
 
 const store = useInputParameters();
 const chunkingBehaviorOptions = Object.values(ChunkingBehavior);

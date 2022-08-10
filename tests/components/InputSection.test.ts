@@ -1,8 +1,8 @@
 import {
-  describe, expect, it, beforeEach, afterEach,
+  afterEach, beforeEach, describe, expect, it,
 } from 'vitest';
-import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
+import { mount } from '@vue/test-utils';
 
 import InputSection from '@/components/InputSection.vue';
 import useInputParameters from '@/store/useInputParameters';
