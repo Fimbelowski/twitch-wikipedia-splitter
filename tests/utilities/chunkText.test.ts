@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import {
+  describe, expect, it,
+} from 'vitest';
 
 import ChunkingBehavior from '@/types/ChunkingBehavior';
 import chunkText from '@/utilities/chunkText';
