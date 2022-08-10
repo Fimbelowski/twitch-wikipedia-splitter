@@ -60,6 +60,7 @@ module.exports = {
     'vue/component-api-style': ['error', [
       'script-setup',
     ]],
+    'vue/padding-line-between-blocks': ['error', 'always'],
   },
   settings: {
     'import/parsers': {
