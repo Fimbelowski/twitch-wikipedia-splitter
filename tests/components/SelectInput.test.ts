@@ -13,8 +13,8 @@ describe('SelectInput.vue', () => {
   const props = {
     id: 'id',
     label: 'label',
-    options: ['a', 'b', 'c'],
     modelValue: 'a',
+    options: ['a', 'b', 'c'],
   };
 
   let wrapper = mount(SelectInput, { props });
