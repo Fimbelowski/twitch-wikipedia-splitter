@@ -46,6 +46,11 @@ module.exports = {
       ],
       'newlines-between': 'always',
     }],
+    'object-curly-newline': ['error', {
+      ImportDeclaration: {
+        minProperties: 2,
+      },
+    }],
     'sort-imports': ['error', {
       allowSeparatedGroups: true,
       ignoreCase: true,
