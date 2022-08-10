@@ -1,19 +1,3 @@
-<template>
-  <div>
-    <input
-      :id="id"
-      type="checkbox"
-      :checked="checked"
-      @change="onChange"
-    >
-    <label
-      :for="id"
-    >
-      {{ label }}
-    </label>
-  </div>
-</template>
-
 <script setup lang="ts">
 const props = defineProps<{
   id: string,
@@ -33,3 +17,19 @@ function onChange(event: Event) {
   emit('update:modelValue', target.checked);
 }
 </script>
+
+<template>
+  <div>
+    <input
+      :id="id"
+      type="checkbox"
+      :checked="checked"
+      @change="onChange"
+    >
+    <label
+      :for="id"
+    >
+      {{ label }}
+    </label>
+  </div>
+</template>

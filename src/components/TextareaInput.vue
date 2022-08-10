@@ -1,22 +1,3 @@
-<template>
-  <label
-    class="base-textarea__label"
-    :for="id"
-  >
-    {{ label }}
-  </label>
-  <textarea
-    :id="id"
-    ref="textarea"
-    cols="50"
-    :readonly="readonly"
-    rows="25"
-    :spellcheck="false"
-    :value="modelValue"
-    @input="onInput"
-  />
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -44,6 +25,25 @@ defineExpose({
   copyToClipboard,
 });
 </script>
+
+<template>
+  <label
+    class="base-textarea__label"
+    :for="id"
+  >
+    {{ label }}
+  </label>
+  <textarea
+    :id="id"
+    ref="textarea"
+    cols="50"
+    :readonly="readonly"
+    rows="25"
+    :spellcheck="false"
+    :value="modelValue"
+    @input="onInput"
+  />
+</template>
 
 <style>
 textarea {

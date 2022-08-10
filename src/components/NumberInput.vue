@@ -1,19 +1,3 @@
-<template>
-  <label
-    :for="id"
-  >
-    {{ label }}
-  </label>
-  <input
-    :id="id"
-    :max="max"
-    :min="min"
-    type="number"
-    :value="modelValue"
-    @input="onInput"
-  >
-</template>
-
 <script setup lang="ts">
 defineProps<{
   id: string,
@@ -30,3 +14,19 @@ function onInput(event: Event) {
   emit('update:modelValue', parseInt(target.value, 10));
 }
 </script>
+
+<template>
+  <label
+    :for="id"
+  >
+    {{ label }}
+  </label>
+  <input
+    :id="id"
+    :max="max"
+    :min="min"
+    type="number"
+    :value="modelValue"
+    @input="onInput"
+  >
+</template>
