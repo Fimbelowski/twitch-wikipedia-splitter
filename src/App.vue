@@ -4,16 +4,20 @@ import OutputSection from '@/components/OutputSection.vue';
 </script>
 
 <template>
-  <div class="flex">
-    <InputSection />
-    <OutputSection />
-  </div>
+  <InputSection />
+  <OutputSection />
 </template>
 
 <style>
-.flex {
+#app {
   display: flex;
   gap: 10px;
   justify-content: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 </style>

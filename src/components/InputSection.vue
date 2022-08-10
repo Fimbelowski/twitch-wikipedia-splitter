@@ -11,7 +11,7 @@ const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
 </script>
 
 <template>
-  <div>
+  <div class="section">
     <TextareaInput
       id="input"
       label="Input"

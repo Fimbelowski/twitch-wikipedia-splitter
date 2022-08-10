@@ -97,7 +97,7 @@ function copyChunkToClipboard() {
 </script>
 
 <template>
-  <div>
+  <div class="section">
     <TextareaInput
       id="output"
       ref="outputTextarea"
@@ -106,7 +106,7 @@ function copyChunkToClipboard() {
       readonly
     />
     <div
-      class="output__controls"
+      class="output-controls"
     >
       <button
         :disabled="previousChunkDisabled"
@@ -136,3 +136,11 @@ function copyChunkToClipboard() {
     />
   </div>
 </template>
+
+<style>
+.output-controls {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+</style>
