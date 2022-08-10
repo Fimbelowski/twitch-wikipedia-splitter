@@ -27,10 +27,36 @@ module.exports = {
   },
   plugins: [
     'import',
+    'import-newlines',
     'vue',
     '@typescript-eslint',
   ],
   rules: {
+    'import-newlines/enforce': ['error', 1],
+    'import/order': ['error', {
+      groups: [
+        'builtin',
+        'external',
+        [
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        'object',
+        'type',
+      ],
+      'newlines-between': 'always',
+    }],
+    'object-curly-newline': ['error', {
+      ImportDeclaration: {
+        minProperties: 2,
+      },
+    }],
+    'sort-imports': ['error', {
+      allowSeparatedGroups: true,
+      ignoreCase: true,
+    }],
   },
   settings: {
     'import/parsers': {

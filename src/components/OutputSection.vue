@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import {
-  computed, reactive, ref, watch,
+  computed,
+  reactive,
+  ref,
+  watch,
 } from 'vue';
-import useInputParameters from '@/store/useInputParameters';
-import removeParentheticals from '@/utilities/removeParentheticals';
-import chunkText from '@/utilities/chunkText';
-import ChunkingBehavior from '@/types/ChunkingBehavior';
-import removeLineTerminators from '@/utilities/removeLineTerminators';
-import removeCitations from '@/utilities/removeCitations';
-import truncateConsecutiveSpaces from '@/utilities/truncateConsecutiveSpaces';
-import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
-import TextareaInput from './TextareaInput.vue';
+
 import CheckboxInput from './CheckboxInput.vue';
+import ChunkingBehavior from '@/types/ChunkingBehavior';
+import chunkText from '@/utilities/chunkText';
+import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
+import removeCitations from '@/utilities/removeCitations';
+import removeLineTerminators from '@/utilities/removeLineTerminators';
+import removeParentheticals from '@/utilities/removeParentheticals';
+import TextareaInput from './TextareaInput.vue';
+import truncateConsecutiveSpaces from '@/utilities/truncateConsecutiveSpaces';
+import useInputParameters from '@/store/useInputParameters';
 
 const inputParameters = useInputParameters();
 

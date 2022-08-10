@@ -1,7 +1,12 @@
 import {
-  describe, expect, it, beforeEach, afterEach,
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
 } from 'vitest';
 import { mount } from '@vue/test-utils';
+
 import SelectInput from '@/components/SelectInput.vue';
 
 describe('SelectInput.vue', () => {

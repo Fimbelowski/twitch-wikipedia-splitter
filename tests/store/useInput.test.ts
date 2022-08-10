@@ -1,9 +1,16 @@
 import {
-  beforeEach, describe, expect, it,
+  beforeEach,
+  describe,
+  expect,
+  it,
 } from 'vitest';
-import useInputParameters from '@/store/useInputParameters';
-import { setActivePinia, createPinia } from 'pinia';
+import {
+  createPinia,
+  setActivePinia,
+} from 'pinia';
+
 import ChunkingBehavior from '@/types/ChunkingBehavior';
+import useInputParameters from '@/store/useInputParameters';
 
 describe('useInputParameters.ts', () => {
   beforeEach(() => {

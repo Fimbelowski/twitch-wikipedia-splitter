@@ -1,4 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import {
+  describe,
+  expect,
+  it,
+} from 'vitest';
+
 import removeParentheticals from '@/utilities/removeParentheticals';
 
 describe('removeParentheticals.ts', () => {

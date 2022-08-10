@@ -1,5 +1,10 @@
+import {
+  describe,
+  expect,
+  it,
+} from 'vitest';
+
 import removeCitations from '@/utilities/removeCitations';
-import { describe, expect, it } from 'vitest';
 
 describe('removeCitations.ts', () => {
   it('should remove matching square brackets and everything between them', () => {
