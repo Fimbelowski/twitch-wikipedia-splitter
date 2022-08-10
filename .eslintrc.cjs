@@ -57,6 +57,9 @@ module.exports = {
       allowSeparatedGroups: true,
       ignoreCase: true,
     }],
+    'vue/component-api-style': ['error', [
+      'script-setup',
+    ]],
   },
   settings: {
     'import/parsers': {
