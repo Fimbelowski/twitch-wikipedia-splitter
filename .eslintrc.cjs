@@ -43,6 +43,9 @@ module.exports = {
   ],
   rules: {
     'import-newlines/enforce': ['error', 1],
+    'import/no-extraneous-dependencies': ['error', {
+      devDependencies: true,
+    }],
     'import/order': ['error', {
       groups: [
         'builtin',
