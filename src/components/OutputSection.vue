@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import {
-  computed, reactive, ref, watch,
+  computed,
+  reactive,
+  ref,
+  watch,
 } from 'vue';
 
 import CheckboxInput from './CheckboxInput.vue';

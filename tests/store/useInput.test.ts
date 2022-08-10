@@ -1,8 +1,12 @@
 import {
-  beforeEach, describe, expect, it,
+  beforeEach,
+  describe,
+  expect,
+  it,
 } from 'vitest';
 import {
-  createPinia, setActivePinia,
+  createPinia,
+  setActivePinia,
 } from 'pinia';
 
 import ChunkingBehavior from '@/types/ChunkingBehavior';
