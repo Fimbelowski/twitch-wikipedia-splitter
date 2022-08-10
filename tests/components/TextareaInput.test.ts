@@ -2,6 +2,7 @@ import {
   describe, expect, it, beforeEach, afterEach, vi,
 } from 'vitest';
 import { mount } from '@vue/test-utils';
+
 import TextareaInput from '@/components/TextareaInput.vue';
 
 describe('TextareaInput.vue', () => {

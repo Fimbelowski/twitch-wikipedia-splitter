@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+
 import ChunkingBehavior from '@/types/ChunkingBehavior';
 
 const useInputParameters = defineStore('inputParameters', () => {

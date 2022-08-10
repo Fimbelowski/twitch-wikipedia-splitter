@@ -1,9 +1,10 @@
-import InputSection from '@/components/InputSection.vue';
 import {
   describe, expect, it, beforeEach, afterEach,
 } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from '@pinia/testing';
+
+import InputSection from '@/components/InputSection.vue';
 import useInputParameters from '@/store/useInputParameters';
 
 describe('InputSection.vue', () => {

@@ -1,5 +1,6 @@
-import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
 import { describe, expect, it } from 'vitest';
+
+import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
 
 describe('fixOrphanedPunctuation.ts', () => {
   it('should replace a period preceded by a space with a period', () => {

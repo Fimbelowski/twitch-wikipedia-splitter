@@ -1,5 +1,6 @@
-import removeLineTerminators from '@/utilities/removeLineTerminators';
 import { describe, expect, it } from 'vitest';
+
+import removeLineTerminators from '@/utilities/removeLineTerminators';
 
 describe('removeLineTerminators.ts', () => {
   it('should replace newlines with whitespace', () => {
