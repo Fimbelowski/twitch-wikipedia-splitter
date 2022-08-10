@@ -43,20 +43,20 @@ const useInputParameters = defineStore('inputParameters', () => {
   }
 
   return {
+    balkingDistance,
+    chunkingBehavior,
     input,
+    maxChunkSize,
     removeCitations,
     removeLineTerminators,
     removeParentheticals,
-    maxChunkSize,
-    chunkingBehavior,
-    balkingDistance,
+    updateBalkingDistance,
+    updateChunkingBehavior,
     updateInput,
+    updateMaxChunkSize,
     updateRemoveCitations,
     updateRemoveLineTerminators,
     updateRemoveParentheticals,
-    updateMaxChunkSize,
-    updateChunkingBehavior,
-    updateBalkingDistance,
   };
 });
 
