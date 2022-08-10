@@ -46,6 +46,10 @@ module.exports = {
       ],
       'newlines-between': 'always',
     }],
+    'sort-imports': ['error', {
+      allowSeparatedGroups: true,
+      ignoreCase: true,
+    }],
   },
   settings: {
     'import/parsers': {
