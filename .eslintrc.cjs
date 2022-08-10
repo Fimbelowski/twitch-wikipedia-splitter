@@ -61,6 +61,9 @@ module.exports = {
       'script-setup',
     ]],
     'vue/padding-line-between-blocks': ['error', 'always'],
+    'vue/sort-keys': ['error', 'asc', {
+      caseSensitive: false,
+    }],
   },
   settings: {
     'import/parsers': {
