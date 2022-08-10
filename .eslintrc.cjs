@@ -15,6 +15,16 @@ module.exports = {
       files: ['src/**/*.vue'],
       rules: {
         'no-spaced-func': 'off',
+        'vue/component-api-style': ['error', [
+          'script-setup',
+        ]],
+        'vue/component-tags-order': ['error', {
+          order: ['script', 'template', 'style'],
+        }],
+        'vue/padding-line-between-blocks': ['error', 'always'],
+        'vue/sort-keys': ['error', 'asc', {
+          caseSensitive: false,
+        }],
       },
     },
   ],
@@ -56,16 +66,6 @@ module.exports = {
     'sort-imports': ['error', {
       allowSeparatedGroups: true,
       ignoreCase: true,
-    }],
-    'vue/component-api-style': ['error', [
-      'script-setup',
-    ]],
-    'vue/component-tags-order': ['error', {
-      order: ['script', 'template', 'style'],
-    }],
-    'vue/padding-line-between-blocks': ['error', 'always'],
-    'vue/sort-keys': ['error', 'asc', {
-      caseSensitive: false,
     }],
   },
   settings: {
