@@ -15,6 +15,12 @@ import OutputSection from '@/components/OutputSection.vue';
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+  }
+}
+
 .section {
   display: flex;
   flex-direction: column;
