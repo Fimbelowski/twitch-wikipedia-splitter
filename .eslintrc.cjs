@@ -60,6 +60,9 @@ module.exports = {
     'vue/component-api-style': ['error', [
       'script-setup',
     ]],
+    'vue/component-tags-order': ['error', {
+      order: ['script', 'template', 'style'],
+    }],
     'vue/padding-line-between-blocks': ['error', 'always'],
     'vue/sort-keys': ['error', 'asc', {
       caseSensitive: false,
