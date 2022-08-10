@@ -16,17 +16,25 @@ function onInput(event: Event) {
 </script>
 
 <template>
-  <label
-    :for="id"
-  >
-    {{ label }}
-  </label>
-  <input
-    :id="id"
-    :max="max"
-    :min="min"
-    type="number"
-    :value="modelValue"
-    @input="onInput"
-  >
+  <div>
+    <label
+      :for="id"
+    >
+      {{ label }}
+    </label>
+    <input
+      :id="id"
+      :max="max"
+      :min="min"
+      type="number"
+      :value="modelValue"
+      @input="onInput"
+    >
+  </div>
 </template>
+
+<style>
+input[type="number"] {
+  margin-left: 4px;
+}
+</style>

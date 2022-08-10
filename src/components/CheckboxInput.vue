@@ -33,3 +33,9 @@ function onChange(event: Event) {
     </label>
   </div>
 </template>
+
+<style>
+input[type="checkbox"] {
+  margin-left: 0;
+}
+</style>
