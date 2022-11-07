@@ -17,13 +17,18 @@ import OutputSection from '@/components/OutputSection.vue';
   box-sizing: inherit;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   box-sizing: border-box;
+  font-size: 1.75rem;
 }
 
 #app {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   justify-content: center;
 }
 
