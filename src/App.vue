@@ -9,6 +9,18 @@ import OutputSection from '@/components/OutputSection.vue';
 </template>
 
 <style>
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+}
+
 #app {
   display: flex;
   gap: 10px;
