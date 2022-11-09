@@ -8,23 +8,9 @@ import OutputSection from '@/components/OutputSection.vue';
   <OutputSection />
 </template>
 
-<style>
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  box-sizing: border-box;
-  font-size: 1.75rem;
-}
+<style lang="scss">
+@import './sass/base/reset';
+@import './sass/base/typography';
 
 #app {
   display: flex;
