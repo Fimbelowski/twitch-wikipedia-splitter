@@ -9,8 +9,11 @@ export default function chunkText(
   chunkingBehavior: string,
   balkingDistance: number,
 ) {
-  if (input === '') {
-    return [''];
+  if (
+    chunkingBehavior === ChunkingBehavior.none
+    || input === ''
+  ) {
+    return [input];
   }
 
   let remainingInput = input.trim();
