@@ -54,9 +54,11 @@ defineExpose({
   }
 
   &__textarea {
-    height: 40rem;
-    resize: none;
     width: 100%;
+    height: 40rem;
+    margin-bottom: .5rem;
+
+    resize: none;
   }
 }
 </style>
