@@ -109,6 +109,7 @@ function copyChunkToClipboard() {
   >
     <div class="output-section__navigation">
       <button
+        class="output-section__button"
         :disabled="previousChunkDisabled"
         type="button"
         @click="selectPreviousChunk"
@@ -116,12 +117,14 @@ function copyChunkToClipboard() {
         &lt; Previous
       </button>
       <button
+        class="output-section__button"
         type="button"
         @click="copyChunkToClipboard"
       >
         Copy Chunk
       </button>
       <button
+        class="output-section__button"
         :disabled="nextChunkDisabled"
         type="button"
         @click="selectNextChunk"
@@ -139,6 +142,11 @@ function copyChunkToClipboard() {
 
 <style lang="scss">
 .output-section {
+  &__button {
+    display: block;
+    width: 100%;
+  }
+
   &__controls {
     grid-column: output-start / output-end;
 
