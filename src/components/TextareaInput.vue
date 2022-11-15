@@ -48,6 +48,11 @@ defineExpose({
 
 <style lang="scss">
 .textarea-input {
+  &__label {
+    display: block;
+    text-align: center;
+  }
+
   &__textarea {
     height: 40rem;
     resize: none;
