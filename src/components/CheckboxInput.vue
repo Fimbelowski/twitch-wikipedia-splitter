@@ -39,7 +39,7 @@ function onChange(event: Event) {
 <style lang="scss">
 .checkbox-input {
   &__label {
-    padding-left: 1rem;
+    padding-left: .5rem;
   }
 }
 </style>
