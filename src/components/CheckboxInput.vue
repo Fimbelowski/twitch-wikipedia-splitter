@@ -35,3 +35,11 @@ function onChange(event: Event) {
     </label>
   </div>
 </template>
+
+<style lang="scss">
+.checkbox-input {
+  &__label {
+    padding-left: 1rem;
+  }
+}
+</style>
