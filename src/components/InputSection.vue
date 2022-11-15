@@ -66,6 +66,10 @@ const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
   &__options {
     grid-column: input-start / input-end;
     grid-row: 2 / 3;
+
+    :not(:last-child) {
+      margin-bottom: 2px;
+    }
   }
 }
 </style>

@@ -141,6 +141,10 @@ function copyChunkToClipboard() {
 .output-section {
   &__controls {
     grid-column: output-start / output-end;
+
+    :not(:last-child) {
+      margin-bottom: 2px;
+    }
   }
 
   &__navigation {
