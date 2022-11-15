@@ -97,17 +97,17 @@ function copyChunkToClipboard() {
 </script>
 
 <template>
-  <div class="section">
-    <TextareaInput
-      id="output"
-      ref="outputTextarea"
-      :label="outputLabel"
-      :model-value="selectedChunk"
-      readonly
-    />
-    <div
-      class="output-controls"
-    >
+  <TextareaInput
+    id="output"
+    ref="outputTextarea"
+    :label="outputLabel"
+    :model-value="selectedChunk"
+    readonly
+  />
+  <div
+    class="output-section__controls"
+  >
+    <div class="output-section__navigation">
       <button
         :disabled="previousChunkDisabled"
         type="button"
@@ -137,10 +137,16 @@ function copyChunkToClipboard() {
   </div>
 </template>
 
-<style>
-.output-controls {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
+<style lang="scss">
+.output-section {
+  &__controls {
+    grid-column: output-start / output-end;
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
 }
 </style>

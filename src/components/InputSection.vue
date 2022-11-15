@@ -11,13 +11,13 @@ const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
 </script>
 
 <template>
-  <div class="section">
-    <TextareaInput
-      id="input"
-      label="Input"
-      :model-value="store.input"
-      @update:model-value="store.updateInput"
-    />
+  <TextareaInput
+    id="input"
+    label="Input"
+    :model-value="store.input"
+    @update:model-value="store.updateInput"
+  />
+  <div class="input-section__options">
     <CheckboxInput
       id="remove-citations"
       label="Remove Citations"
@@ -60,3 +60,12 @@ const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
     />
   </div>
 </template>
+
+<style lang="scss">
+.input-section {
+  &__options {
+    grid-column: input-start / input-end;
+    grid-row: 2 / 3;
+  }
+}
+</style>
