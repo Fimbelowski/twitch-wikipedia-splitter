@@ -19,23 +19,19 @@ function onChange(event: Event) {
 </script>
 
 <template>
-  <div>
+  <div class="checkbox-input">
     <input
       :id="id"
+      class="checkbox-input__input"
       type="checkbox"
       :checked="checked"
       @change="onChange"
     >
     <label
+      class="checkbox-input__label"
       :for="id"
     >
       {{ label }}
     </label>
   </div>
 </template>
-
-<style>
-input[type="checkbox"] {
-  margin-left: 0;
-}
-</style>

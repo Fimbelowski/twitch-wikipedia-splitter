@@ -16,14 +16,16 @@ function onInput(event: Event) {
 </script>
 
 <template>
-  <div>
+  <div class="number-input">
     <label
+      class="number-input__label"
       :for="id"
     >
       {{ label }}
     </label>
     <input
       :id="id"
+      class="number-input__input"
       :max="max"
       :min="min"
       type="number"
@@ -33,8 +35,10 @@ function onInput(event: Event) {
   </div>
 </template>
 
-<style>
-input[type="number"] {
-  margin-left: 4px;
+<style lang="scss">
+.number-input {
+  &__label {
+    padding-right: 1rem;
+  }
 }
 </style>
