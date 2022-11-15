@@ -21,7 +21,7 @@ import OutputSection from './OutputSection.vue';
   grid-template-columns:
     [input-start] 1fr [input-end arrow-start]  2.5rem [arrow-end output-start] 1fr [output-end];
 
-  column-gap: 1rem;
+  gap: 1rem;
 
   &__arrow {
     align-self: center;
