@@ -6,7 +6,7 @@ import OutputSection from './OutputSection.vue';
 <template>
   <div class="main-content">
     <InputSection />
-    <span class="main-content__arrow">&xrarr;</span>
+    <span class="main-content__arrow" />
     <OutputSection />
   </div>
 </template>
@@ -19,12 +19,33 @@ import OutputSection from './OutputSection.vue';
 
   display: grid;
   grid-template-columns:
-    [input-start] 1fr [input-end arrow-start]  2.5rem [arrow-end output-start] 1fr [output-end];
+    [input-start] 1fr [input-end arrow-start]  3.5rem [arrow-end output-start] 1fr [output-end];
 
   column-gap: 1rem;
 
+  @include respond(medium) {
+    padding: 1rem;
+  }
+
+  @include respond(small) {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
   &__arrow {
     align-self: center;
+    justify-self: center;
+
+    font-size: 3rem;
+
+    &::after {
+      content: "\2192";
+
+      @include respond(small) {
+        content: "\2193";
+      }
+    }
   }
 }
 </style>

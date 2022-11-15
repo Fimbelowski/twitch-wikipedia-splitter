@@ -59,6 +59,10 @@ defineExpose({
     margin-bottom: .5rem;
 
     resize: none;
+
+    @include respond(small) {
+      height: 25rem;
+    }
   }
 }
 </style>
