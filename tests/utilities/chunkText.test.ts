@@ -15,7 +15,7 @@ const exampleInput = 'Unit tests are typically automated tests written and run b
 
 describe('chunkTest.ts', () => {
   it('returns an array containing only an empty string when an empty string is passed in as input', () => {
-    expect(chunkText('', 1, ChunkingBehavior.sentenceBoundary, 1)).toStrictEqual(['']);
+    expect(chunkText('', 1, ChunkingBehavior.hardSentenceBoundary, 1)).toStrictEqual(['']);
   });
 
   it('returns an array of strings whose lengths are less than or equal to "maxChunkSize." when "chunkingBehavior" is "Chunk Size"', () => {
@@ -35,7 +35,7 @@ describe('chunkTest.ts', () => {
     let chunks = chunkText(
       exampleInput,
       200,
-      ChunkingBehavior.sentenceBoundary,
+      ChunkingBehavior.hardSentenceBoundary,
       Infinity,
     );
 
@@ -52,7 +52,7 @@ describe('chunkTest.ts', () => {
     let chunks = chunkText(
       exampleInput,
       200,
-      ChunkingBehavior.sentenceBoundary,
+      ChunkingBehavior.hardSentenceBoundary,
       25,
     );
 
@@ -72,7 +72,7 @@ describe('chunkTest.ts', () => {
     const chunks = chunkText(
       exampleInput,
       100,
-      ChunkingBehavior.sentenceBoundary,
+      ChunkingBehavior.hardSentenceBoundary,
       1,
     );
 
