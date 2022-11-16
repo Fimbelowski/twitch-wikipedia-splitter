@@ -27,31 +27,42 @@ defineExpose({
 </script>
 
 <template>
-  <label
-    class="base-textarea__label"
-    :for="id"
-  >
-    {{ label }}
-  </label>
-  <textarea
-    :id="id"
-    ref="textarea"
-    cols="50"
-    :readonly="readonly"
-    rows="25"
-    :spellcheck="false"
-    :value="modelValue"
-    @input="onInput"
-  />
+  <div class="textarea-input">
+    <label
+      class="textarea-input__label"
+      :for="id"
+    >
+      {{ label }}
+    </label>
+    <textarea
+      :id="id"
+      ref="textarea"
+      class="textarea-input__textarea"
+      :readonly="readonly"
+      :spellcheck="false"
+      :value="modelValue"
+      @input="onInput"
+    />
+  </div>
 </template>
 
-<style>
-textarea {
-  display: block;
-  resize: none;
-}
+<style lang="scss">
+.textarea-input {
+  &__label {
+    display: block;
+    text-align: center;
+  }
 
-.base-textarea__label {
-  display: block;
+  &__textarea {
+    width: 100%;
+    height: 40rem;
+    margin-bottom: .5rem;
+
+    resize: none;
+
+    @include respond(small) {
+      height: 25rem;
+    }
+  }
 }
 </style>

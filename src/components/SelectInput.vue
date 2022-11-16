@@ -15,15 +15,16 @@ function onInput(event: Event) {
 </script>
 
 <template>
-  <div>
+  <div class="select-input">
     <label
-      class="base-select__label"
+      class="select-input__label"
       :for="id"
     >
       {{ label }}
     </label>
     <select
       :id="id"
+      class="select-input__select"
       :value="modelValue"
       @input="onInput"
     >
@@ -38,8 +39,10 @@ function onInput(event: Event) {
   </div>
 </template>
 
-<style>
-.base-select__label {
-  margin-right: 5px;
+<style lang="scss">
+.select-input {
+  &__label {
+    padding-right: 1rem;
+  }
 }
 </style>
