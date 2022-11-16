@@ -19,14 +19,16 @@ function onChange(event: Event) {
 </script>
 
 <template>
-  <div>
+  <div class="checkbox-input">
     <input
       :id="id"
+      class="checkbox-input__input"
       type="checkbox"
       :checked="checked"
       @change="onChange"
     >
     <label
+      class="checkbox-input__label"
       :for="id"
     >
       {{ label }}
@@ -34,8 +36,10 @@ function onChange(event: Event) {
   </div>
 </template>
 
-<style>
-input[type="checkbox"] {
-  margin-left: 0;
+<style lang="scss">
+.checkbox-input {
+  &__label {
+    padding-left: .5rem;
+  }
 }
 </style>
