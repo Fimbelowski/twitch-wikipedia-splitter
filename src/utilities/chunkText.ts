@@ -14,6 +14,11 @@ export default function chunkText(
   const chunks: string[] = [];
 
   while (remainingInput.length > 0) {
+    if (remainingInput.length <= maxChunkSize) {
+      chunks.push(remainingInput.trim());
+      break;
+    }
+
     const nextChunk = getNextChunk(remainingInput, maxChunkSize, chunkingBehavior, balkingDistance);
     chunks.push(nextChunk);
 
