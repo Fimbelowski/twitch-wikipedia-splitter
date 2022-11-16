@@ -7,7 +7,7 @@
     "coverage": "vitest run --coverage",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "lint": "npx eslint {*.ts,{src,tests}/**/*} --ext .ts,.vue --fix --cache",
+    "lint": "npx eslint {*.ts,{src,tests}/**/*.{ts,vue}} --fix --cache",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
