@@ -1,7 +1,4 @@
-import ChunkingBehavior from '@/types/ChunkingBehavior';
-
-const hardSentenceBoundaryRegExp = /[.?!] /gm;
-const softSentenceBoundaryRegExp = /[,;-] /gm;
+import getNextChunk from './getNextChunk';
 
 export default function chunkText(
   input: string,
@@ -9,10 +6,7 @@ export default function chunkText(
   chunkingBehavior: string,
   balkingDistance: number,
 ) {
-  if (
-    chunkingBehavior === ChunkingBehavior.none
-    || input === ''
-  ) {
+  if (input === '') {
     return [input];
   }
 
@@ -20,53 +14,11 @@ export default function chunkText(
   const chunks: string[] = [];
 
   while (remainingInput.length > 0) {
-    if (remainingInput.length <= maxChunkSize) {
-      chunks.push(remainingInput);
-      break;
-    }
-
-    const rawChunk = remainingInput.substring(0, maxChunkSize);
-    let tentativeEndIndex = rawChunk.length - 1;
-    let distance = Infinity;
-
-    if (chunkingBehavior === ChunkingBehavior.sentenceBoundary) {
-      let matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
-      let nextMatch = matches.pop();
-
-      if (nextMatch?.index !== undefined) {
-        tentativeEndIndex = nextMatch.index;
-        distance = maxChunkSize - tentativeEndIndex + 1;
-      }
-
-      if (distance > balkingDistance) {
-        matches = Array.from(rawChunk.matchAll(softSentenceBoundaryRegExp));
-        nextMatch = matches.pop();
-
-        if (nextMatch?.index !== undefined) {
-          tentativeEndIndex = nextMatch.index;
-          distance = maxChunkSize - tentativeEndIndex + 1;
-        }
-      }
-    }
-
-    if (
-      chunkingBehavior === ChunkingBehavior.wordBoundary
-      || distance > balkingDistance
-    ) {
-      if (rawChunk.includes(' ')) {
-        tentativeEndIndex = rawChunk.lastIndexOf(' ');
-        distance = maxChunkSize - tentativeEndIndex + 1;
-      }
-    }
-
-    if (distance > balkingDistance) {
-      tentativeEndIndex = rawChunk.length - 1;
-    }
-
-    chunks.push(rawChunk.substring(0, tentativeEndIndex + 1).trim());
+    const nextChunk = getNextChunk(remainingInput, maxChunkSize, chunkingBehavior, balkingDistance);
+    chunks.push(nextChunk);
 
     remainingInput = remainingInput
-      .substring(tentativeEndIndex + 1)
+      .slice(nextChunk.length)
       .trim();
   }
 

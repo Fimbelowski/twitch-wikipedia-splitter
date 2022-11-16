@@ -1,7 +1,8 @@
 enum ChunkingBehavior {
   chunkSize = 'Chunk Size',
+  hardSentenceBoundary = 'Hard Sentence Boundary',
   none = 'None',
-  sentenceBoundary = 'Sentence Boundary',
+  softSentenceBoundary = 'Soft Sentence Boundary',
   wordBoundary = 'Word Boundary',
 }
 

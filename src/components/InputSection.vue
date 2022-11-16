@@ -7,7 +7,13 @@ import TextareaInput from './TextareaInput.vue';
 import useInputParameters from '@/store/useInputParameters';
 
 const store = useInputParameters();
-const chunkingBehaviorOptions = Object.values(ChunkingBehavior);
+const chunkingBehaviorOptions = [
+  ChunkingBehavior.none,
+  ChunkingBehavior.chunkSize,
+  ChunkingBehavior.wordBoundary,
+  ChunkingBehavior.softSentenceBoundary,
+  ChunkingBehavior.hardSentenceBoundary,
+];
 </script>
 
 <template>

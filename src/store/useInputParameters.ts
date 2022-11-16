@@ -11,7 +11,7 @@ const useInputParameters = defineStore('inputParameters', () => {
   const removeParentheticals = ref(true);
 
   const maxChunkSize = ref(500);
-  const chunkingBehavior = ref(ChunkingBehavior.sentenceBoundary);
+  const chunkingBehavior = ref(ChunkingBehavior.hardSentenceBoundary);
   const balkingDistance = ref(100);
 
   function updateInput(newValue: string) {
