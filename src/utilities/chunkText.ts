@@ -6,16 +6,19 @@ const wordBoundaryRegexp = /(?<=\b) /g;
 const softSentenceBoundaryRegExp = /(?<=[,;-] )/g;
 const hardSentenceBoundaryRegExp = /(?<=[.?!] )/g;
 
-const regExpOptions = [
-  hardSentenceBoundaryRegExp,
-  softSentenceBoundaryRegExp,
-  wordBoundaryRegexp,
-];
-
-const chunkingBehaviorsUsingRegExp = [
-  ChunkingBehavior.hardSentenceBoundary,
-  ChunkingBehavior.softSentenceBoundary,
-  ChunkingBehavior.wordBoundary,
+const chunkingBehaviorRegExpPairs = [
+  {
+    chunkingBehavior: ChunkingBehavior.hardSentenceBoundary,
+    regExp: hardSentenceBoundaryRegExp,
+  },
+  {
+    chunkingBehavior: ChunkingBehavior.softSentenceBoundary,
+    regExp: softSentenceBoundaryRegExp,
+  },
+  {
+    chunkingBehavior: ChunkingBehavior.wordBoundary,
+    regExp: wordBoundaryRegexp,
+  },
 ];
 
 export default function chunkText(
@@ -44,14 +47,16 @@ export default function chunkText(
     } else if (chunkingBehavior === ChunkingBehavior.chunkSize) {
       nextChunk = getChunkByChunkSize(remainingInput, maxChunkSize);
     } else {
-      const chunkingBehaviorIndex = chunkingBehaviorsUsingRegExp.indexOf(chunkingBehavior);
+      const chunkingBehaviorIndex = chunkingBehaviorRegExpPairs.findIndex(
+        (item) => item.chunkingBehavior === chunkingBehavior,
+      );
 
       nextChunk = getChunkByRegExpMatch(
         remainingInput,
         maxChunkSize,
         balkingDistance,
-        regExpOptions[chunkingBehaviorIndex],
-        regExpOptions.slice(chunkingBehaviorIndex),
+        chunkingBehaviorRegExpPairs[chunkingBehaviorIndex].regExp,
+        chunkingBehaviorRegExpPairs.slice(chunkingBehaviorIndex).map((item) => item.regExp),
       );
     }
 
