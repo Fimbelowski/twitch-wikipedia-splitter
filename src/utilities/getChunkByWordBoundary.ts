@@ -1,10 +1,10 @@
 import getLastMatchWithinMaxChunkSize from './getLastMatchWithinMaxChunkSize';
-import getNextChunkByChunkSize from './getNextChunkByChunkSize';
+import getChunkByChunkSize from './getChunkByChunkSize';
 import isMatchWithinBalkingDistance from './isMatchWithinBalkingDistance';
 
 const wordBoundaryRegexp = /\b/g;
 
-export default function getNextChunkByWordBoundary(
+export default function getChunkByWordBoundary(
   input: string,
   maxChunkSize: number,
   balkingDistance: number,
@@ -13,5 +13,5 @@ export default function getNextChunkByWordBoundary(
 
   return isMatchWithinBalkingDistance(lastMatch, maxChunkSize, balkingDistance)
     ? input.slice(0, lastMatch?.index)
-    : getNextChunkByChunkSize(input, maxChunkSize);
+    : getChunkByChunkSize(input, maxChunkSize);
 }

@@ -1,4 +1,4 @@
-export default function getNextChunkByChunkSize(
+export default function getChunkByChunkSize(
   input: string,
   maxChunkSize: number,
 ) {

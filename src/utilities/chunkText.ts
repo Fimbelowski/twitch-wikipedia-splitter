@@ -1,8 +1,8 @@
 import ChunkingBehavior from '@/types/ChunkingBehavior';
-import getNextChunkByChunkSize from './getNextChunkByChunkSize';
-import getNextChunkByHardSentenceBoundary from './getNextChunkByHardSentenceBoundary';
-import getNextChunkBySoftSentenceBoundary from './getNextChunkBySoftSentenceBoundary';
-import getNextChunkByWordBoundary from './getNextChunkByWordBoundary';
+import getChunkByChunkSize from './getChunkByChunkSize';
+import getChunkByHardSentenceBoundary from './getChunkByHardSentenceBoundary';
+import getChunkBySoftSentenceBoundary from './getChunkBySoftSentenceBoundary';
+import getChunkByWordBoundary from './getChunkByWordBoundary';
 
 export default function chunkText(
   input: string,
@@ -28,13 +28,13 @@ export default function chunkText(
     if (chunkingBehavior === ChunkingBehavior.none) {
       nextChunk = remainingInput;
     } else if (chunkingBehavior === ChunkingBehavior.chunkSize) {
-      nextChunk = getNextChunkByChunkSize(remainingInput, maxChunkSize);
+      nextChunk = getChunkByChunkSize(remainingInput, maxChunkSize);
     } else if (chunkingBehavior === ChunkingBehavior.wordBoundary) {
-      nextChunk = getNextChunkByWordBoundary(remainingInput, maxChunkSize, balkingDistance);
+      nextChunk = getChunkByWordBoundary(remainingInput, maxChunkSize, balkingDistance);
     } else if (chunkingBehavior === ChunkingBehavior.softSentenceBoundary) {
-      nextChunk = getNextChunkBySoftSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
+      nextChunk = getChunkBySoftSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
     } else {
-      nextChunk = getNextChunkByHardSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
+      nextChunk = getChunkByHardSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
     }
 
     chunks.push(nextChunk);

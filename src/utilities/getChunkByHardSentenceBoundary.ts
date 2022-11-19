@@ -1,17 +1,17 @@
+import getChunkBySoftSentenceBoundary from './getChunkBySoftSentenceBoundary';
 import getLastMatchWithinMaxChunkSize from './getLastMatchWithinMaxChunkSize';
-import getNextChunkByWordBoundary from './getNextChunkByWordBoundary';
 import isMatchWithinBalkingDistance from './isMatchWithinBalkingDistance';
 
-const softSentenceBoundaryRegExp = /[,;-] /g;
+const hardSentenceBoundaryRegExp = /[.?!] /g;
 
-export default function getNextChunkBySoftSentenceBoundary(
+export default function getChunkByHardSentenceBoundary(
   input: string,
   maxChunkSize: number,
   balkingDistance: number,
 ) {
-  const lastMatch = getLastMatchWithinMaxChunkSize(input, softSentenceBoundaryRegExp, maxChunkSize);
+  const lastMatch = getLastMatchWithinMaxChunkSize(input, hardSentenceBoundaryRegExp, maxChunkSize);
 
   return isMatchWithinBalkingDistance(lastMatch, maxChunkSize, balkingDistance)
     ? input.slice(0, (lastMatch?.index || Infinity) + 1)
-    : getNextChunkByWordBoundary(input, maxChunkSize, balkingDistance);
+    : getChunkBySoftSentenceBoundary(input, maxChunkSize, balkingDistance);
 }
