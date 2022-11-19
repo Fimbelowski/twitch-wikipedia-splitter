@@ -1,8 +1,10 @@
 import ChunkingBehavior from '@/types/ChunkingBehavior';
 import getChunkByChunkSize from './getChunkByChunkSize';
-import getChunkByHardSentenceBoundary from './getChunkByHardSentenceBoundary';
-import getChunkBySoftSentenceBoundary from './getChunkBySoftSentenceBoundary';
-import getChunkByWordBoundary from './getChunkByWordBoundary';
+import getChunkByRegExpMatch from './getChunkByRegExpMatch';
+
+const wordBoundaryRegexp = /(?<=\b) /g;
+const softSentenceBoundaryRegExp = /(?<=[,;-] )/g;
+const hardSentenceBoundaryRegExp = /(?<=[.?!] )/g;
 
 export default function chunkText(
   input: string,
@@ -30,11 +32,29 @@ export default function chunkText(
     } else if (chunkingBehavior === ChunkingBehavior.chunkSize) {
       nextChunk = getChunkByChunkSize(remainingInput, maxChunkSize);
     } else if (chunkingBehavior === ChunkingBehavior.wordBoundary) {
-      nextChunk = getChunkByWordBoundary(remainingInput, maxChunkSize, balkingDistance);
+      nextChunk = getChunkByRegExpMatch(
+        remainingInput,
+        maxChunkSize,
+        balkingDistance,
+        wordBoundaryRegexp,
+        [],
+      );
     } else if (chunkingBehavior === ChunkingBehavior.softSentenceBoundary) {
-      nextChunk = getChunkBySoftSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
+      nextChunk = getChunkByRegExpMatch(
+        remainingInput,
+        maxChunkSize,
+        balkingDistance,
+        softSentenceBoundaryRegExp,
+        [wordBoundaryRegexp],
+      );
     } else {
-      nextChunk = getChunkByHardSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
+      nextChunk = getChunkByRegExpMatch(
+        remainingInput,
+        maxChunkSize,
+        balkingDistance,
+        hardSentenceBoundaryRegExp,
+        [softSentenceBoundaryRegExp, wordBoundaryRegexp],
+      );
     }
 
     chunks.push(nextChunk);
