@@ -2,22 +2,18 @@ import ChunkingBehavior from '@/types/ChunkingBehavior';
 import getChunkByChunkSize from './getChunkByChunkSize';
 import getChunkByRegExpMatch from './getChunkByRegExpMatch';
 
-const wordBoundaryRegexp = /(?<=\b) /g;
-const softSentenceBoundaryRegExp = /(?<=[,;-] )/g;
-const hardSentenceBoundaryRegExp = /(?<=[.?!] )/g;
-
 const chunkingBehaviorRegExpPairs = [
   {
     chunkingBehavior: ChunkingBehavior.hardSentenceBoundary,
-    regExp: hardSentenceBoundaryRegExp,
+    regExp: /(?<=[.?!] )/g,
   },
   {
     chunkingBehavior: ChunkingBehavior.softSentenceBoundary,
-    regExp: softSentenceBoundaryRegExp,
+    regExp: /(?<=[,;-] )/g,
   },
   {
     chunkingBehavior: ChunkingBehavior.wordBoundary,
-    regExp: wordBoundaryRegexp,
+    regExp: /(?<=\b) /g,
   },
 ];
 
