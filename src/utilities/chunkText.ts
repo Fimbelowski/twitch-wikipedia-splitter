@@ -1,4 +1,8 @@
-import getNextChunk from './getNextChunk';
+import ChunkingBehavior from '@/types/ChunkingBehavior';
+import getNextChunkByChunkSize from './getNextChunkByChunkSize';
+import getNextChunkByHardSentenceBoundary from './getNextChunkByHardSentenceBoundary';
+import getNextChunkBySoftSentenceBoundary from './getNextChunkBySoftSentenceBoundary';
+import getNextChunkByWordBoundary from './getNextChunkByWordBoundary';
 
 export default function chunkText(
   input: string,
@@ -19,7 +23,20 @@ export default function chunkText(
       break;
     }
 
-    const nextChunk = getNextChunk(remainingInput, maxChunkSize, chunkingBehavior, balkingDistance);
+    let nextChunk: string;
+
+    if (chunkingBehavior === ChunkingBehavior.none) {
+      nextChunk = remainingInput;
+    } else if (chunkingBehavior === ChunkingBehavior.chunkSize) {
+      nextChunk = getNextChunkByChunkSize(remainingInput, maxChunkSize);
+    } else if (chunkingBehavior === ChunkingBehavior.wordBoundary) {
+      nextChunk = getNextChunkByWordBoundary(remainingInput, maxChunkSize, balkingDistance);
+    } else if (chunkingBehavior === ChunkingBehavior.softSentenceBoundary) {
+      nextChunk = getNextChunkBySoftSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
+    } else {
+      nextChunk = getNextChunkByHardSentenceBoundary(remainingInput, maxChunkSize, balkingDistance);
+    }
+
     chunks.push(nextChunk);
 
     remainingInput = remainingInput
