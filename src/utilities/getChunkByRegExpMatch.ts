@@ -1,12 +1,29 @@
+import ChunkingBehavior from '@/types/ChunkingBehavior';
+import ChunkingBehaviorUsingRegExp from '@/types/ChunkingBehaviorUsingRegExp';
 import getChunkByChunkSize from './getChunkByChunkSize';
+
+type RegExpByChunkingBehavior = Record<ChunkingBehaviorUsingRegExp, RegExp>;
+
+const regExpByChunkingBehavior: RegExpByChunkingBehavior = {
+  [ChunkingBehavior.wordBoundary]: /(?<=\b) /g,
+  [ChunkingBehavior.softSentenceBoundary]: /(?<=[,;-] )/g,
+  [ChunkingBehavior.hardSentenceBoundary]: /(?<=[.?!] )/g,
+};
+
+const chunkingBehaviorsMostToLeastRestrictive: ChunkingBehaviorUsingRegExp[] = [
+  ChunkingBehavior.hardSentenceBoundary,
+  ChunkingBehavior.softSentenceBoundary,
+  ChunkingBehavior.wordBoundary,
+];
 
 export default function getChunkByRegExpMatch(
   input: string,
   maxChunkSize: number,
   balkingDistance: number,
-  regExp: RegExp,
-  regExpFallbacks: RegExp[],
+  chunkingBehavior: ChunkingBehaviorUsingRegExp,
 ): string {
+  const regExp = regExpByChunkingBehavior[chunkingBehavior];
+
   const matches = Array
     .from(input.matchAll(regExp))
     .filter((match) => match.index !== undefined && match.index + 1 < maxChunkSize);
@@ -20,15 +37,20 @@ export default function getChunkByRegExpMatch(
     return input.slice(0, lastMatch.index);
   }
 
-  const nextRegExp = regExpFallbacks.shift();
+  const currentChunkingBehaviorIndex = (
+    chunkingBehaviorsMostToLeastRestrictive.indexOf(chunkingBehavior)
+  );
 
-  if (nextRegExp !== undefined) {
+  const nextChunkingBehavior = (
+    chunkingBehaviorsMostToLeastRestrictive[currentChunkingBehaviorIndex + 1]
+  );
+
+  if (nextChunkingBehavior !== undefined) {
     return getChunkByRegExpMatch(
       input,
       maxChunkSize,
       balkingDistance,
-      nextRegExp,
-      regExpFallbacks,
+      nextChunkingBehavior,
     );
   }
 
