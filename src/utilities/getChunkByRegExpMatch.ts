@@ -6,8 +6,8 @@ type RegExpByChunkingBehavior = Record<ChunkingBehaviorUsingRegExp, RegExp>;
 
 const regExpByChunkingBehavior: RegExpByChunkingBehavior = {
   [ChunkingBehavior.wordBoundary]: /(?<=\b) /g,
-  [ChunkingBehavior.softSentenceBoundary]: /(?<=[,;-] )/g,
-  [ChunkingBehavior.hardSentenceBoundary]: /(?<=[.?!] )/g,
+  [ChunkingBehavior.softSentenceBoundary]: /(?<=[,;-]) /g,
+  [ChunkingBehavior.hardSentenceBoundary]: /(?<=[.?!]) /g,
 };
 
 const chunkingBehaviorsByRestrictiveness: ChunkingBehaviorUsingRegExp[] = [
