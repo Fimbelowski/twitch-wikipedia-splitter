@@ -10,7 +10,7 @@ const regExpByChunkingBehavior: RegExpByChunkingBehavior = {
   [ChunkingBehavior.hardSentenceBoundary]: /(?<=[.?!] )/g,
 };
 
-const chunkingBehaviorsMostToLeastRestrictive: ChunkingBehaviorUsingRegExp[] = [
+const chunkingBehaviorsByRestrictiveness: ChunkingBehaviorUsingRegExp[] = [
   ChunkingBehavior.hardSentenceBoundary,
   ChunkingBehavior.softSentenceBoundary,
   ChunkingBehavior.wordBoundary,
@@ -37,13 +37,9 @@ export default function getChunkByRegExpMatch(
     return input.slice(0, lastMatch.index);
   }
 
-  const currentChunkingBehaviorIndex = (
-    chunkingBehaviorsMostToLeastRestrictive.indexOf(chunkingBehavior)
-  );
+  const currentChunkingBehaviorIndex = chunkingBehaviorsByRestrictiveness.indexOf(chunkingBehavior);
 
-  const nextChunkingBehavior = (
-    chunkingBehaviorsMostToLeastRestrictive[currentChunkingBehaviorIndex + 1]
-  );
+  const nextChunkingBehavior = chunkingBehaviorsByRestrictiveness[currentChunkingBehaviorIndex + 1];
 
   if (nextChunkingBehavior !== undefined) {
     return getChunkByRegExpMatch(
