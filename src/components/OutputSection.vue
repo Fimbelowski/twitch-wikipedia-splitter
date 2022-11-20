@@ -7,7 +7,6 @@ import {
 } from 'vue';
 
 import CheckboxInput from './CheckboxInput.vue';
-import ChunkingBehavior from '@/types/ChunkingBehavior';
 import chunkText from '@/utilities/chunkText';
 import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
 import removeCitations from '@/utilities/removeCitations';
@@ -58,18 +57,12 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => {
-  if (inputParameters.chunkingBehavior === ChunkingBehavior.none) {
-    return [parsedInput.value];
-  }
-
-  return chunkText(
-    parsedInput.value,
-    inputParameters.maxChunkSize,
-    inputParameters.chunkingBehavior,
-    inputParameters.balkingDistance,
-  );
-});
+const chunkedParsedInput = computed(() => chunkText(
+  parsedInput.value,
+  inputParameters.maxChunkSize,
+  inputParameters.chunkingBehavior,
+  inputParameters.balkingDistance,
+));
 
 const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
 

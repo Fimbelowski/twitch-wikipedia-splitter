@@ -1,16 +1,15 @@
 import ChunkingBehavior from '@/types/ChunkingBehavior';
-
-const hardSentenceBoundaryRegExp = /[.?!] /gm;
-const softSentenceBoundaryRegExp = /[,;-] /gm;
+import getChunkByChunkSize from './getChunkByChunkSize';
+import getChunkByRegExpMatch from './getChunkByRegExpMatch';
 
 export default function chunkText(
   input: string,
   maxChunkSize: number,
-  chunkingBehavior: string,
+  chunkingBehavior: ChunkingBehavior,
   balkingDistance: number,
 ) {
   if (input === '') {
-    return [''];
+    return [input];
   }
 
   let remainingInput = input.trim();
@@ -18,52 +17,29 @@ export default function chunkText(
 
   while (remainingInput.length > 0) {
     if (remainingInput.length <= maxChunkSize) {
-      chunks.push(remainingInput);
+      chunks.push(remainingInput.trim());
       break;
     }
 
-    const rawChunk = remainingInput.substring(0, maxChunkSize);
-    let tentativeEndIndex = rawChunk.length - 1;
-    let distance = Infinity;
+    let nextChunk: string;
 
-    if (chunkingBehavior === ChunkingBehavior.sentenceBoundary) {
-      let matches = Array.from(rawChunk.matchAll(hardSentenceBoundaryRegExp));
-      let nextMatch = matches.pop();
-
-      if (nextMatch?.index !== undefined) {
-        tentativeEndIndex = nextMatch.index;
-        distance = maxChunkSize - tentativeEndIndex + 1;
-      }
-
-      if (distance > balkingDistance) {
-        matches = Array.from(rawChunk.matchAll(softSentenceBoundaryRegExp));
-        nextMatch = matches.pop();
-
-        if (nextMatch?.index !== undefined) {
-          tentativeEndIndex = nextMatch.index;
-          distance = maxChunkSize - tentativeEndIndex + 1;
-        }
-      }
+    if (chunkingBehavior === ChunkingBehavior.none) {
+      nextChunk = remainingInput;
+    } else if (chunkingBehavior === ChunkingBehavior.chunkSize) {
+      nextChunk = getChunkByChunkSize(remainingInput, maxChunkSize);
+    } else {
+      nextChunk = getChunkByRegExpMatch(
+        remainingInput,
+        maxChunkSize,
+        balkingDistance,
+        chunkingBehavior,
+      );
     }
 
-    if (
-      chunkingBehavior === ChunkingBehavior.wordBoundary
-      || distance > balkingDistance
-    ) {
-      if (rawChunk.includes(' ')) {
-        tentativeEndIndex = rawChunk.lastIndexOf(' ');
-        distance = maxChunkSize - tentativeEndIndex + 1;
-      }
-    }
-
-    if (distance > balkingDistance) {
-      tentativeEndIndex = rawChunk.length - 1;
-    }
-
-    chunks.push(rawChunk.substring(0, tentativeEndIndex + 1).trim());
+    chunks.push(nextChunk);
 
     remainingInput = remainingInput
-      .substring(tentativeEndIndex + 1)
+      .slice(nextChunk.length)
       .trim();
   }
 

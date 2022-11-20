@@ -15,7 +15,18 @@ const exampleInput = 'Unit tests are typically automated tests written and run b
 
 describe('chunkTest.ts', () => {
   it('returns an array containing only an empty string when an empty string is passed in as input', () => {
-    expect(chunkText('', 1, ChunkingBehavior.sentenceBoundary, 1)).toStrictEqual(['']);
+    expect(chunkText('', 1, ChunkingBehavior.hardSentenceBoundary, 1)).toStrictEqual(['']);
+  });
+
+  it('returns an array containing only one element equal to the input when "chunkingBehavior" is "None"', () => {
+    const result = chunkText(
+      exampleInput,
+      500,
+      ChunkingBehavior.none,
+      100,
+    );
+
+    expect(result).toStrictEqual([exampleInput]);
   });
 
   it('returns an array of strings whose lengths are less than or equal to "maxChunkSize." when "chunkingBehavior" is "Chunk Size"', () => {
@@ -32,16 +43,12 @@ describe('chunkTest.ts', () => {
   });
 
   it('returns an array of strings that all end on a hard sentence boundary when "chunkingBehavior" is "Sentence Boundary" and "balkingDistance" is high', () => {
-    let chunks = chunkText(
+    const chunks = chunkText(
       exampleInput,
       200,
-      ChunkingBehavior.sentenceBoundary,
+      ChunkingBehavior.hardSentenceBoundary,
       Infinity,
     );
-
-    // When testing to see that a chunk ends on a specific type of character the last character of
-    // the last chunk cannot be guaranteed, so we test all chunks except the last.
-    chunks = chunks.slice(0, -1);
 
     expect(
       chunks.every((chunk) => hardSentenceBoundaryRegExp.test(chunk.slice(-1))),
@@ -52,7 +59,7 @@ describe('chunkTest.ts', () => {
     let chunks = chunkText(
       exampleInput,
       200,
-      ChunkingBehavior.sentenceBoundary,
+      ChunkingBehavior.hardSentenceBoundary,
       25,
     );
 
@@ -72,7 +79,7 @@ describe('chunkTest.ts', () => {
     const chunks = chunkText(
       exampleInput,
       100,
-      ChunkingBehavior.sentenceBoundary,
+      ChunkingBehavior.hardSentenceBoundary,
       1,
     );
 
