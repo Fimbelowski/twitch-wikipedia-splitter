@@ -9,7 +9,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "lint": "npx eslint {*.ts,{src,tests}/**/*.{ts,vue}} --fix --cache",
     "preview": "vite preview",
-    "test": "vitest run --coverage",
+    "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
