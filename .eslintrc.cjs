@@ -35,28 +35,8 @@ module.exports = {
     project: './tsconfig.eslint.json',
     sourceType: 'module',
   },
-  plugins: ['import', 'import-newlines', 'vue', '@typescript-eslint'],
+  plugins: ['vue', '@typescript-eslint'],
   rules: {
-    'import-newlines/enforce': ['error', 1],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-      },
-    ],
-    'import/order': [
-      'error',
-      {
-        groups: [
-          'builtin',
-          'external',
-          ['internal', 'parent', 'sibling', 'index'],
-          'object',
-          'type',
-        ],
-        'newlines-between': 'always',
-      },
-    ],
     'object-curly-newline': [
       'error',
       {
