@@ -28,7 +28,6 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.4.0",
-    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-import-newlines": "^1.2.3",
     "eslint-plugin-vue": "^9.3.0",
     "jsdom": "^20.0.0",
