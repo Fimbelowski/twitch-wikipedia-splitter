@@ -3,10 +3,10 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb-base', 'airbnb-typescript/base'],
+  extends: ['airbnb-base', 'airbnb-typescript/base', 'prettier'],
   overrides: [
     {
-      extends: ['plugin:vue/vue3-recommended'],
+      extends: ['plugin:vue/vue3-recommended', 'prettier'],
       files: ['src/**/*.vue'],
       rules: {
         'no-spaced-func': 'off',
