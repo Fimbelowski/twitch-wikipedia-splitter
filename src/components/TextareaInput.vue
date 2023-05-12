@@ -4,10 +4,10 @@ import { ref } from 'vue';
 const textarea = ref<HTMLTextAreaElement | null>(null);
 
 defineProps<{
-  id: string,
-  label: string,
-  modelValue: string,
-  readonly?: boolean,
+  id: string;
+  label: string;
+  modelValue: string;
+  readonly?: boolean;
 }>();
 
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
@@ -28,10 +28,7 @@ defineExpose({
 
 <template>
   <div class="textarea-input">
-    <label
-      class="textarea-input__label"
-      :for="id"
-    >
+    <label class="textarea-input__label" :for="id">
       {{ label }}
     </label>
     <textarea
@@ -56,7 +53,7 @@ defineExpose({
   &__textarea {
     width: 100%;
     height: 40rem;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 
     resize: none;
 

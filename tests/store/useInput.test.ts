@@ -1,13 +1,5 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  it,
-} from 'vitest';
-import {
-  createPinia,
-  setActivePinia,
-} from 'pinia';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { createPinia, setActivePinia } from 'pinia';
 
 import ChunkingBehavior from '@/types/ChunkingBehavior';
 import useInputParameters from '@/store/useInputParameters';

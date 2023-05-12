@@ -6,7 +6,7 @@ export default function chunkText(
   input: string,
   maxChunkSize: number,
   chunkingBehavior: ChunkingBehavior,
-  balkingDistance: number,
+  balkingDistance: number
 ) {
   if (input === '') {
     return [input];
@@ -32,15 +32,13 @@ export default function chunkText(
         remainingInput,
         maxChunkSize,
         balkingDistance,
-        chunkingBehavior,
+        chunkingBehavior
       );
     }
 
     chunks.push(nextChunk);
 
-    remainingInput = remainingInput
-      .slice(nextChunk.length)
-      .trim();
+    remainingInput = remainingInput.slice(nextChunk.length).trim();
   }
 
   return chunks;

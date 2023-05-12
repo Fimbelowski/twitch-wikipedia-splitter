@@ -1,13 +1,12 @@
 <script setup lang="ts">
 defineProps<{
-  id: string,
-  label: string,
-  options: string[],
-  modelValue: string,
+  id: string;
+  label: string;
+  options: string[];
+  modelValue: string;
 }>();
 
-const emit = defineEmits<{ (e: 'update:modelValue', value: string): void,
-}>();
+const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
 
 function onInput(event: Event) {
   emit('update:modelValue', (event.target as HTMLSelectElement).value);
@@ -16,10 +15,7 @@ function onInput(event: Event) {
 
 <template>
   <div class="select-input">
-    <label
-      class="select-input__label"
-      :for="id"
-    >
+    <label class="select-input__label" :for="id">
       {{ label }}
     </label>
     <select
@@ -28,11 +24,7 @@ function onInput(event: Event) {
       :value="modelValue"
       @input="onInput"
     >
-      <option
-        v-for="(option, index) in options"
-        :key="index"
-        :value="option"
-      >
+      <option v-for="(option, index) in options" :key="index" :value="option">
         {{ option }}
       </option>
     </select>
