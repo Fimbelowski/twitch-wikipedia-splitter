@@ -1,8 +1,6 @@
 export default function getChunkByChunkSize(
   input: string,
-  maxChunkSize: number,
+  maxChunkSize: number
 ) {
-  return input
-    .slice(0, maxChunkSize)
-    .trim();
+  return input.slice(0, maxChunkSize).trim();
 }

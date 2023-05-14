@@ -20,33 +20,35 @@ export default function getChunkByRegExpMatch(
   input: string,
   maxChunkSize: number,
   balkingDistance: number,
-  chunkingBehavior: ChunkingBehaviorUsingRegExp,
+  chunkingBehavior: ChunkingBehaviorUsingRegExp
 ): string {
   const regExp = regExpByChunkingBehavior[chunkingBehavior];
 
-  const matches = Array
-    .from(input.matchAll(regExp))
-    .filter((match) => match.index !== undefined && match.index + 1 < maxChunkSize);
+  const matches = Array.from(input.matchAll(regExp)).filter(
+    (match) => match.index !== undefined && match.index + 1 < maxChunkSize
+  );
 
   const lastMatch = matches.pop();
 
   if (
-    lastMatch?.index !== undefined
-    && maxChunkSize - lastMatch.index + 1 < balkingDistance
+    lastMatch?.index !== undefined &&
+    maxChunkSize - lastMatch.index + 1 < balkingDistance
   ) {
     return input.slice(0, lastMatch.index);
   }
 
-  const currentChunkingBehaviorIndex = chunkingBehaviorsByRestrictiveness.indexOf(chunkingBehavior);
+  const currentChunkingBehaviorIndex =
+    chunkingBehaviorsByRestrictiveness.indexOf(chunkingBehavior);
 
-  const nextChunkingBehavior = chunkingBehaviorsByRestrictiveness[currentChunkingBehaviorIndex + 1];
+  const nextChunkingBehavior =
+    chunkingBehaviorsByRestrictiveness[currentChunkingBehaviorIndex + 1];
 
   if (nextChunkingBehavior !== undefined) {
     return getChunkByRegExpMatch(
       input,
       maxChunkSize,
       balkingDistance,
-      nextChunkingBehavior,
+      nextChunkingBehavior
     );
   }
 

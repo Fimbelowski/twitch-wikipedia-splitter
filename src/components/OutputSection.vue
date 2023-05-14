@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import {
-  computed,
-  reactive,
-  ref,
-  watch,
-} from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 
-import CheckboxInput from './CheckboxInput.vue';
 import chunkText from '@/utilities/chunkText';
 import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
 import removeCitations from '@/utilities/removeCitations';
 import removeLineTerminators from '@/utilities/removeLineTerminators';
 import removeParentheticals from '@/utilities/removeParentheticals';
-import TextareaInput from './TextareaInput.vue';
 import truncateConsecutiveSpaces from '@/utilities/truncateConsecutiveSpaces';
 import useInputParameters from '@/store/useInputParameters';
+import TextareaInput from './TextareaInput.vue';
+import CheckboxInput from './CheckboxInput.vue';
 
 const inputParameters = useInputParameters();
 
@@ -32,7 +27,7 @@ watch(
   },
   {
     deep: true,
-  },
+  }
 );
 
 const parsedInput = computed(() => {
@@ -57,19 +52,28 @@ const parsedInput = computed(() => {
   return parsed.trim();
 });
 
-const chunkedParsedInput = computed(() => chunkText(
-  parsedInput.value,
-  inputParameters.maxChunkSize,
-  inputParameters.chunkingBehavior,
-  inputParameters.balkingDistance,
-));
+const chunkedParsedInput = computed(() =>
+  chunkText(
+    parsedInput.value,
+    inputParameters.maxChunkSize,
+    inputParameters.chunkingBehavior,
+    inputParameters.balkingDistance
+  )
+);
 
-const outputLabel = computed(() => `Output (${state.selectedChunkIndex + 1}/${chunkedParsedInput.value.length})`);
+const outputLabel = computed(
+  () =>
+    `Output (${state.selectedChunkIndex + 1}/${
+      chunkedParsedInput.value.length
+    })`
+);
 
-const selectedChunk = computed(() => chunkedParsedInput.value[state.selectedChunkIndex]);
+const selectedChunk = computed(
+  () => chunkedParsedInput.value[state.selectedChunkIndex]
+);
 const previousChunkDisabled = computed(() => state.selectedChunkIndex === 0);
 const nextChunkDisabled = computed(
-  () => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1,
+  () => state.selectedChunkIndex >= chunkedParsedInput.value.length - 1
 );
 
 function selectPreviousChunk() {
@@ -97,9 +101,7 @@ function copyChunkToClipboard() {
     :model-value="selectedChunk"
     readonly
   />
-  <div
-    class="output-section__controls"
-  >
+  <div class="output-section__controls">
     <div class="output-section__navigation">
       <button
         class="output-section__button"

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
-  id: string,
-  label: string,
-  modelValue: boolean,
+  id: string;
+  label: string;
+  modelValue: boolean;
 }>();
 
 const emit = defineEmits<{ (e: 'update:modelValue', value: boolean): void }>();
@@ -26,11 +26,8 @@ function onChange(event: Event) {
       type="checkbox"
       :checked="checked"
       @change="onChange"
-    >
-    <label
-      class="checkbox-input__label"
-      :for="id"
-    >
+    />
+    <label class="checkbox-input__label" :for="id">
       {{ label }}
     </label>
   </div>
@@ -39,7 +36,7 @@ function onChange(event: Event) {
 <style lang="scss">
 .checkbox-input {
   &__label {
-    padding-left: .5rem;
+    padding-left: 0.5rem;
   }
 }
 </style>

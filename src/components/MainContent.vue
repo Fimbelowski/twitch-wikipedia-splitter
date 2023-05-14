@@ -18,8 +18,7 @@ import OutputSection from './OutputSection.vue';
   max-width: 120rem;
 
   display: grid;
-  grid-template-columns:
-    [input-start] 1fr [input-end arrow-start]  3.5rem [arrow-end output-start] 1fr [output-end];
+  grid-template-columns: [input-start] 1fr [input-end arrow-start] 3.5rem [arrow-end output-start] 1fr [output-end];
 
   column-gap: 1rem;
 
@@ -30,7 +29,7 @@ import OutputSection from './OutputSection.vue';
   @include respond(small) {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
   }
 
   &__arrow {
@@ -40,10 +39,10 @@ import OutputSection from './OutputSection.vue';
     font-size: 3rem;
 
     &::after {
-      content: "\2192";
+      content: '\2192';
 
       @include respond(small) {
-        content: "\2193";
+        content: '\2193';
       }
     }
   }

@@ -1,8 +1,4 @@
-import {
-  describe,
-  expect,
-  it,
-} from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import ChunkingBehavior from '@/types/ChunkingBehavior';
 import chunkText from '@/utilities/chunkText';
@@ -11,20 +7,18 @@ const hardSentenceBoundaryRegExp = /[.?!]/;
 const softSentenceBoundaryRegExp = /[,;-]/;
 const wordCharacterRegExp = /\w/;
 
-const exampleInput = 'Unit tests are typically automated tests written and run by software developers to ensure that a section of an application meets its design and behaves as intended. In procedural programming, a unit could be an entire module, but it is more commonly an individual function or procedure. In object-oriented programming, a unit is often an entire interface, such as a class, or an individual method. By writing tests first for the smallest testable units, then the compound behaviors between those, one can build up comprehensive tests for complex applications.';
+const exampleInput =
+  'Unit tests are typically automated tests written and run by software developers to ensure that a section of an application meets its design and behaves as intended. In procedural programming, a unit could be an entire module, but it is more commonly an individual function or procedure. In object-oriented programming, a unit is often an entire interface, such as a class, or an individual method. By writing tests first for the smallest testable units, then the compound behaviors between those, one can build up comprehensive tests for complex applications.';
 
 describe('chunkTest.ts', () => {
   it('returns an array containing only an empty string when an empty string is passed in as input', () => {
-    expect(chunkText('', 1, ChunkingBehavior.hardSentenceBoundary, 1)).toStrictEqual(['']);
+    expect(
+      chunkText('', 1, ChunkingBehavior.hardSentenceBoundary, 1)
+    ).toStrictEqual(['']);
   });
 
   it('returns an array containing only one element equal to the input when "chunkingBehavior" is "None"', () => {
-    const result = chunkText(
-      exampleInput,
-      500,
-      ChunkingBehavior.none,
-      100,
-    );
+    const result = chunkText(exampleInput, 500, ChunkingBehavior.none, 100);
 
     expect(result).toStrictEqual([exampleInput]);
   });
@@ -36,7 +30,7 @@ describe('chunkTest.ts', () => {
       exampleInput,
       maxChunkSize,
       ChunkingBehavior.chunkSize,
-      Infinity,
+      Infinity
     );
 
     expect(chunks.every((chunk) => chunk.length <= maxChunkSize)).toBe(true);
@@ -47,11 +41,11 @@ describe('chunkTest.ts', () => {
       exampleInput,
       200,
       ChunkingBehavior.hardSentenceBoundary,
-      Infinity,
+      Infinity
     );
 
     expect(
-      chunks.every((chunk) => hardSentenceBoundaryRegExp.test(chunk.slice(-1))),
+      chunks.every((chunk) => hardSentenceBoundaryRegExp.test(chunk.slice(-1)))
     ).toBe(true);
   });
 
@@ -60,7 +54,7 @@ describe('chunkTest.ts', () => {
       exampleInput,
       200,
       ChunkingBehavior.hardSentenceBoundary,
-      25,
+      25
     );
 
     chunks = chunks.slice(0, -1);
@@ -69,9 +63,11 @@ describe('chunkTest.ts', () => {
       chunks.every((chunk) => {
         const lastCharacter = chunk.slice(-1);
 
-        return hardSentenceBoundaryRegExp.test(lastCharacter)
-          || softSentenceBoundaryRegExp.test(lastCharacter);
-      }),
+        return (
+          hardSentenceBoundaryRegExp.test(lastCharacter) ||
+          softSentenceBoundaryRegExp.test(lastCharacter)
+        );
+      })
     );
   });
 
@@ -80,16 +76,18 @@ describe('chunkTest.ts', () => {
       exampleInput,
       100,
       ChunkingBehavior.hardSentenceBoundary,
-      1,
+      1
     );
 
     expect(
       chunks.every((chunk) => {
         const lastCharacter = chunk.slice(-1);
 
-        return hardSentenceBoundaryRegExp.test(lastCharacter)
-          || softSentenceBoundaryRegExp.test(lastCharacter);
-      }),
+        return (
+          hardSentenceBoundaryRegExp.test(lastCharacter) ||
+          softSentenceBoundaryRegExp.test(lastCharacter)
+        );
+      })
     ).toBe(false);
   });
 
@@ -98,7 +96,7 @@ describe('chunkTest.ts', () => {
       exampleInput,
       50,
       ChunkingBehavior.wordBoundary,
-      Infinity,
+      Infinity
     );
 
     expect(
@@ -112,7 +110,7 @@ describe('chunkTest.ts', () => {
         const nextCharacter = exampleInput.charAt(indexOfNextCharacter);
 
         return !wordCharacterRegExp.test(nextCharacter);
-      }),
+      })
     ).toBe(true);
   });
 
@@ -121,7 +119,7 @@ describe('chunkTest.ts', () => {
       exampleInput,
       50,
       ChunkingBehavior.wordBoundary,
-      1,
+      1
     );
 
     expect(
@@ -135,7 +133,7 @@ describe('chunkTest.ts', () => {
         const nextCharacter = exampleInput.charAt(indexOfNextCharacter);
 
         return !wordCharacterRegExp.test(nextCharacter);
-      }),
+      })
     ).toBe(false);
   });
 });

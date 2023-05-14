@@ -1,10 +1,4 @@
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-} from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createTestingPinia } from '@pinia/testing';
 import { mount } from '@vue/test-utils';
 
@@ -14,18 +8,14 @@ import useInputParameters from '@/store/useInputParameters';
 describe('InputSection.vue', () => {
   let wrapper = mount(InputSection, {
     global: {
-      plugins: [
-        createTestingPinia(),
-      ],
+      plugins: [createTestingPinia()],
     },
   });
 
   beforeEach(() => {
     wrapper = mount(InputSection, {
       global: {
-        plugins: [
-          createTestingPinia(),
-        ],
+        plugins: [createTestingPinia()],
       },
     });
   });
