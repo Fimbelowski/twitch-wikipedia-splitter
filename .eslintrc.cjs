@@ -10,6 +10,7 @@ module.exports = {
       files: ['src/**/*.vue'],
       rules: {
         'vue/component-api-style': ['error', ['script-setup']],
+        'vue/multi-word-component-names': 'off',
       },
     },
   ],
