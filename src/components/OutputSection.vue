@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, reactive, watch } from 'vue';
 
 import chunkText from '@/utilities/chunkText';
 import fixOrphanedPunctuation from '@/utilities/fixOrphanedPunctuation';
@@ -8,12 +8,9 @@ import removeLineTerminators from '@/utilities/removeLineTerminators';
 import removeParentheticals from '@/utilities/removeParentheticals';
 import truncateConsecutiveSpaces from '@/utilities/truncateConsecutiveSpaces';
 import useInputParameters from '@/store/useInputParameters';
-import TextareaInput from './TextareaInput.vue';
 import CheckboxInput from './CheckboxInput.vue';
 
 const inputParameters = useInputParameters();
-
-const outputTextarea = ref<InstanceType<typeof TextareaInput> | null>(null);
 
 const state = reactive({
   autoSelectNextChunkOnCopy: true,
@@ -84,8 +81,8 @@ function selectNextChunk() {
   state.selectedChunkIndex += 1;
 }
 
-function copyChunkToClipboard() {
-  outputTextarea.value?.copyToClipboard();
+async function copyChunkToClipboard() {
+  await navigator.clipboard.writeText(selectedChunk.value);
 
   if (state.autoSelectNextChunkOnCopy && !nextChunkDisabled.value) {
     selectNextChunk();
@@ -94,13 +91,10 @@ function copyChunkToClipboard() {
 </script>
 
 <template>
-  <TextareaInput
-    id="output"
-    ref="outputTextarea"
-    :label="outputLabel"
-    :model-value="selectedChunk"
-    readonly
-  />
+  <div>
+    <label class="output-section__output-label">{{ outputLabel }}</label>
+    <output class="output-section__output">{{ selectedChunk }}</output>
+  </div>
   <div class="output-section__controls">
     <div class="output-section__navigation">
       <button
@@ -154,6 +148,20 @@ function copyChunkToClipboard() {
     display: flex;
     justify-content: center;
     gap: 4px;
+  }
+
+  &__output {
+    background-color: #eee;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    display: block;
+    height: 40rem;
+    padding: 0.5rem;
+  }
+
+  &__output-label {
+    display: block;
+    text-align: center;
   }
 }
 </style>
