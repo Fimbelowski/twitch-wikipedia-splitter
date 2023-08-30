@@ -109,7 +109,7 @@ function copyChunkToClipboard() {
         type="button"
         @click="selectPreviousChunk"
       >
-        &lt; Previous
+        &lt; Previous Chunk
       </button>
       <button
         class="output-section__button"
@@ -124,7 +124,7 @@ function copyChunkToClipboard() {
         type="button"
         @click="selectNextChunk"
       >
-        Next &gt;
+        Next Chunk &gt;
       </button>
     </div>
     <CheckboxInput
