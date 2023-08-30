@@ -4,15 +4,15 @@ import OutputSection from './OutputSection.vue';
 </script>
 
 <template>
-  <div class="main-content">
+  <main class="layout">
     <InputSection />
-    <span class="main-content__arrow" />
+    <span class="layout__arrow" />
     <OutputSection />
-  </div>
+  </main>
 </template>
 
 <style lang="scss">
-.main-content {
+.layout {
   padding: 5rem;
   margin: 0 auto;
   max-width: 120rem;
