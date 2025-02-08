@@ -31,6 +31,10 @@ watch(
 );
 
 const parsedInput = computed(() => {
+  if (Number.isNaN(inputParameters.maxChunkSize)) {
+    return '';
+  }
+
   let parsed = inputParameters.input;
 
   if (inputParameters.removeParentheticals) {
